@@ -21,6 +21,11 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/uwu', function () {
 //     return "Hemlo boi~";
 // });
-
-Route::resource('/', 'MoviesController');
+Route::get('/','MoviesController@index')->name('index');
+Route::get('create','MoviesController@create')->name('create');
+Route::post('store',['uses' => 'MoviesController@store','as' => 'store']);
+Route::get('/movie/{id}',['uses' => 'MoviesController@show','as' => 'show']);
+Route::get('/movie/edit/{id}',['uses' => 'MoviesController@edit','as' => 'edit']);
+Route::post('update',['uses' => 'MoviesController@update','as' => 'update']);
+Route::get('/destroy/{id}',['uses' => 'MoviesController@destroy','as' => 'destroy']);
 Route::resource('actors', 'ActorsController');
