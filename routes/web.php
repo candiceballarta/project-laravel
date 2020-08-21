@@ -21,3 +21,4 @@ Route::get('/', function () {
 Route::get('/uwu', function () {
     return "Hemlo boi~";
 });
+
