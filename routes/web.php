@@ -22,3 +22,8 @@ Route::get('/uwu', function () {
     return "Hemlo boi~";
 });
 
+Route::get('/rename', function () {
+    Schema::rename('actor_notes', 'actors');
+});
+
+Route::resource('movies', 'MoviesController');
