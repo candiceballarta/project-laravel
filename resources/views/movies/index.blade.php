@@ -9,7 +9,7 @@
 <body>
 @section('body')
 <div class="container">
-    <a href="{{route('create')}}" class="btn btn-primary a-btn-slide-text">
+    <a href="{{route('movies.create')}}" class="btn btn-primary a-btn-slide-text">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         <span><strong>ADD</strong></span>
     </a>
@@ -33,9 +33,9 @@
         @foreach($movies as $movie)
         <tr>
         <td>{{$movie->id}}</td>
-            <td><a href="{{route('show',$movie->id)}}">{{$movie->title}}</a></td>
-            <td align="center"><a href="{{ route('edit',$movie->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
-            <td align="center"><a href="{{ route('destroy',$movie->id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
+            <td><a href="{{route('movies.show',$movie->id)}}">{{$movie->title}}</a></td>
+            <td align="center"><a href="{{ route('movies.edit',$movie->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
+            <td align="center"><a href="{{ route('movies.destroy',$movie->id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
         @endforeach
     </tbody>
 </table>

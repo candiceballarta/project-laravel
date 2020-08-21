@@ -15,7 +15,7 @@
 <div class="container">
 
 <h2>Create New Movie</h2>
-<form method="post" action="{{url('store')}}" >
+<form method="post" action="{{url('movies')}}" >
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 <div class="form-group">
