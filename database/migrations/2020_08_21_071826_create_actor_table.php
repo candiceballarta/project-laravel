@@ -17,7 +17,9 @@ class CreateActorTable extends Migration
             $table->id();
             $table->string('fname',16);
             $table->string('lname',16);
+            $table->string('notes',50);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
