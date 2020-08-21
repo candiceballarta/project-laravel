@@ -14,7 +14,7 @@
 
 <div class="container">
 
-<h2>Create New Movie</h2>
+<h2>Create New Actor</h2>
 {!! Form::model($actors,['method'=>'PATCH','route' => ['actors.create']]) !!}
 {{-- csrf_field() --}}
 {{-- method_field('PATCH') --}}

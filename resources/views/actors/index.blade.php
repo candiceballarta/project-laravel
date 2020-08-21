@@ -9,7 +9,7 @@
 <body>
 @section('body')
 <div class="container">
-    <a href="{{route('create')}}" class="btn btn-primary a-btn-slide-text">
+    <a href="{{route('actors.create')}}" class="btn btn-primary a-btn-slide-text">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         <span><strong>ADD</strong></span>
     </a>
