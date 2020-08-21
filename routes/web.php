@@ -22,3 +22,4 @@ Route::get('/uwu', function () {
     return "Hemlo boi~";
 });
 
+Route::resource('actors', 'ActorsController');
