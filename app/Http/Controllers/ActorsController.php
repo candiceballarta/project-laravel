@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
+use App\actors;
 
 class ActorsController extends Controller
 {
@@ -13,7 +16,10 @@ class ActorsController extends Controller
      */
     public function index()
     {
-        //
+        $actors = actors::all();
+        // dd($actors);
+        return View::make('actors.index',compact('actors'));
+
     }
 
     /**
@@ -23,7 +29,7 @@ class ActorsController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('actors.create');
     }
 
     /**
@@ -34,7 +40,9 @@ class ActorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        actors::create($input);
+        return Redirect::to('/actors')->with('success','New Movie added!');
     }
 
     /**
@@ -45,7 +53,9 @@ class ActorsController extends Controller
      */
     public function show($id)
     {
-        //
+        $actors = actors::find($id);
+        //dd($actors);
+        return View::make('actors.show',compact('actors'));
     }
 
     /**
@@ -56,7 +66,9 @@ class ActorsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $actors = actors::find($id);
+        //dd($actors);
+        return View::make('actors.edit',compact('actors'));
     }
 
     /**
@@ -68,7 +80,9 @@ class ActorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $actors = actors::find($request->id);
+        $actors->update($request->all());
+        return Redirect::to('/actors')->with('success','Movie updated!');
     }
 
     /**
@@ -79,6 +93,8 @@ class ActorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $actors = actors::find($id);
+        $actors->delete();
+        return Redirect::to('/actors')->with('success','Movie deleted!');
     }
 }
