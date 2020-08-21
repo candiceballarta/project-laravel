@@ -41,7 +41,7 @@ class MoviesController extends Controller
     {
         //dd($request);
         $input = $request->all();
-        movie_titles::create($input);
+        movies::create($input);
         return Redirect::to('/')->with('success','New Movie added!');
     }
 
@@ -53,7 +53,7 @@ class MoviesController extends Controller
      */
     public function show($id)
     {
-        $movies = movie_titles::find($id);
+        $movies = movies::find($id);
         //dd($movies);
         return View::make('show',compact('movies'));
     }
@@ -66,7 +66,7 @@ class MoviesController extends Controller
      */
     public function edit($id)
     {
-        $movies = movie_titles::find($id);
+        $movies = movies::find($id);
         //dd($movies);
         return View::make('edit',compact('movies'));
     }
@@ -80,7 +80,7 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $movies = movie_titles::find($request->id);
+        $movies = movies::find($request->id);
         $movies->update($request->all());
         return Redirect::to('/')->with('success','Movie updated!');
     }
@@ -93,7 +93,7 @@ class MoviesController extends Controller
      */
     public function destroy($id)
     {
-        $movies = movie_titles::find($id);
+        $movies = movies::find($id);
         $movies->delete();
         return Redirect::to('/')->with('success','Movie deleted!');
     }
