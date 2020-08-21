@@ -14,24 +14,23 @@
 
 <div class="container">
 
-<h2>Create New Movie</h2>
-{!! Form::model($actors,['method'=>'PATCH','route' => ['actors.create']]) !!}
-{{-- csrf_field() --}}
-{{-- method_field('PATCH') --}}
+<h2>Create New Actor</h2>
+<form method="post" action="{{url('actors')}}" >
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 <div class="form-group">
-    <label for="fname" class="control-label">FirstName</label>
-    {{ Form::text('fname',null,array('class'=>'form-control')) }}
+<label for="fname" class="control-label">First Name</label>
+<input type="text" class="form-control" id="fname" name="fname" >
 </div>
 
 <div class="form-group">
-    <label for="lname" class="control-label">LastName</label>
-    {{ Form::text('lname',null,array('class'=>'form-control')) }}
+<label for="lname" class="control-label">Last Name</label>
+<input type="text" class="form-control " id="lname" name="lname" ></input>
 </div>
 
 <div class="form-group">
-    <label for="notes" class="control-label">Notes</label>
-    {{ Form::text('notes',null,array('class'=>'form-control')) }}
+<label for="notes" class="control-label">Notes</label>
+<input type="text" class="form-control " id="notes" name="notes" ></input>
 </div>
 
 <button type="submit" class="btn btn-primary">Save</button>
@@ -39,5 +38,4 @@
 </div>
 </div>
 </form>
-{!! Form::close() !!}
 @endsection
