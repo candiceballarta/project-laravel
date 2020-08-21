@@ -19,5 +19,5 @@ Route::get('/', function () {
 
 
 Route::get('/uwu', function () {
-    return "Hemlo world~";
+    return "Hemlo boi~";
 });
