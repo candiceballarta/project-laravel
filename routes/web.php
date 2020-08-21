@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
-Route::get('/uwu', function () {
-    return "Hemlo boi~";
-});
+// Route::get('/uwu', function () {
+//     return "Hemlo boi~";
+// });
 
-Route::resource('movies', 'MoviesController');
+Route::resource('/', 'MoviesController');
 Route::resource('actors', 'ActorsController');
