@@ -40,6 +40,7 @@ class MoviesController extends Controller
     public function store(Request $request)
     {
         //dd($request);
+        $rules = ['title' =>'required','lname'=>'required','fname'=>'required','addressline'=>'required','phone','town'=>'required','zipcode'=>'required'];
         $input = $request->all();
         movies::create($input);
         return Redirect::to('/movies')->with('success','New Movie added!');

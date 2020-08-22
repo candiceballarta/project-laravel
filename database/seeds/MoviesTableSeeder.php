@@ -16,7 +16,7 @@ class MoviesTableSeeder extends Seeder
         foreach(range(1,50) as $index){
             movies::create([
                 'title' => $faker->words($nb = 3, $asText = true),
-                'director' => $faker->name($gender = 'others'|'male'|'female'),
+                'plot' => $faker->sentences($nb = 2, $asText = true)    ,
                 'year' => $faker->year()
                 ]);
         }
