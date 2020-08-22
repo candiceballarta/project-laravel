@@ -13,7 +13,7 @@ class CreateActorTable extends Migration
      */
     public function up()
     {
-        Schema::create('actor', function (Blueprint $table) {
+        Schema::create('actors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('fname',16);
             $table->string('lname',16);
@@ -30,6 +30,6 @@ class CreateActorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('actor');
+        Schema::dropIfExists('actors');
     }
 }
