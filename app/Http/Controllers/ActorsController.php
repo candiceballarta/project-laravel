@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\actors;
 
 class ActorsController extends Controller
@@ -40,9 +41,14 @@ class ActorsController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = ['fname'=>'required|max:16|alpha','lname'=>'required|max:16|alpha','notes'=>'required|max:50'];
         $input = $request->all();
-        actors::create($input);
-        return Redirect::to('/actors')->with('success','New Movie added!');
+        $validator = Validator::make($input, $rules);
+        if ($validator->passes()) {
+            actors::create($input);
+            return Redirect::to('/actors')->with('success','New Actor added!');
+        }
+        return redirect()->back()->withInput()->withErrors($validator);
     }
 
     /**
@@ -82,7 +88,7 @@ class ActorsController extends Controller
     {
         $actors = actors::find($request->id);
         $actors->update($request->all());
-        return Redirect::to('/actors')->with('success','Movie updated!');
+        return Redirect::to('/actors')->with('success','Actor updated!');
     }
 
     /**
@@ -95,6 +101,6 @@ class ActorsController extends Controller
     {
         $actors = actors::find($id);
         $actors->delete();
-        return Redirect::to('/actors')->with('success','Movie deleted!');
+        return Redirect::to('/actors')->with('success','Actor deleted!');
     }
 }
