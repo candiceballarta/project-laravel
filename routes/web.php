@@ -21,8 +21,9 @@ Route::get('/', function () {
 //     return "Hemlo boi~";
 // });
 
-Route::resource('movies','MoviesController');
-Route::resource('actors', 'ActorsController');
+
 Auth::routes();
 
+Route::resource('movies','MoviesController');
+Route::resource('actors', 'ActorsController');
 Route::get('/home', 'HomeController@index')->name('home');

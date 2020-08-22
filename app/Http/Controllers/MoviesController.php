@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\movies;
 
 class MoviesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -40,10 +46,14 @@ class MoviesController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        $rules = ['title' =>'required','lname'=>'required','fname'=>'required','addressline'=>'required','phone','town'=>'required','zipcode'=>'required'];
+        $rules = ['title' =>'required|max:45','plot'=>'required','year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y")];
         $input = $request->all();
-        movies::create($input);
-        return Redirect::to('/movies')->with('success','New Movie added!');
+        $validator = Validator::make($input, $rules);
+        if ($validator->passes()) {
+            movies::create($input);
+            return Redirect::to('/movies')->with('success','New Movie added!');
+        }
+        return redirect()->back()->withInput()->withErrors($validator);
     }
 
     /**
@@ -81,9 +91,15 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $movies = movies::find($request->id);
-        $movies->update($request->all());
-        return Redirect::to('/movies')->with('success','Movie updated!');
+        $rules = ['title' =>'required|max:45','plot'=>'required','year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y")];
+        $input = $request->all();
+        $validator = Validator::make($input, $rules);
+        if ($validator->passes()) {
+            $movies = movies::find($request->id);
+            $movies->update($input);
+            return Redirect::to('/movies')->with('success','Movie updated!');
+        }
+        return redirect()->back()->withInput()->withErrors($validator);
     }
 
     /**
