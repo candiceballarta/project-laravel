@@ -22,16 +22,25 @@
 <div class="form-group">
     <label for="title" class="control-label">Title</label>
     {{ Form::text('title',null,array('class'=>'form-control','id'=>'title')) }}
+    @if($errors->has('title'))
+        <small>{{ $errors->first('title') }}</small>
+    @endif
 </div>
 
 <div class="form-group">
     <label for="artist" class="control-label">Plot</label>
     {{ Form::text('plot',null,array('class'=>'form-control','id'=>'plot')) }}
+    @if($errors->has('plot'))
+        <small>{{ $errors->first('plot') }}</small>
+    @endif
 </div>
 
 <div class="form-group">
     <label for="year" class="control-label">Year</label>
     {{ Form::text('year',null,array('class'=>'form-control','id'=>'year')) }}
+    @if($errors->has('year'))
+        <small>{{ $errors->first('year') }}</small>
+    @endif
 </div>
 
     <input type="hidden"   name="id" value="{{$movies->id}}">

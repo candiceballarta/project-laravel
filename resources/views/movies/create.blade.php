@@ -1,13 +1,5 @@
-<!-- resources/views/create.blade.php -->
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title></title>
-@extends('layouts.base')
-</head>
-<body>
-@section('body')
+@extends('layouts.app')
+@section('content')
 
 <div class="table-responsive">
 <table class="table table-striped table-hover">
@@ -19,18 +11,27 @@
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 <div class="form-group">
-<label for="title" class="control-label">Title</label>
-<input type="text" class="form-control" id="title" name="title" >
+    <label for="title" class="control-label">Title</label>
+    <input type="text" class="form-control" id="title" name="title" value="{{old('title')}}">
+    @if($errors->has('title'))
+        <small>{{ $errors->first('title') }}</small>
+    @endif
 </div>
 
 <div class="form-group">
-<label for="artist" class="control-label">Plot</label>
-<input type="text" class="form-control " id="plot" name="plot" ></input>
+    <label for="artist" class="control-label">Plot</label>
+    <input type="text" class="form-control " id="plot" name="plot" value="{{old('plot')}}"></input>
+    @if($errors->has('plot'))
+        <small>{{ $errors->first('plot') }}</small>
+    @endif
 </div>
 
 <div class="form-group">
-<label for="year" class="control-label">Year</label>
-<input type="text" class="form-control" id="year" name="year">
+    <label for="year" class="control-label">Year</label>
+    <input type="text" class="form-control" id="year" name="year"  value="{{old('year')}}">
+    @if($errors->has('year'))
+        <small>{{ $errors->first('year') }}</small>
+    @endif
 </div>
 
 <button type="submit" class="btn btn-primary">Save</button>
