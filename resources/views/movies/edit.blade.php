@@ -25,8 +25,8 @@
 </div>
 
 <div class="form-group">
-    <label for="artist" class="control-label">Director</label>
-    {{ Form::text('director',null,array('class'=>'form-control','id'=>'director')) }}
+    <label for="artist" class="control-label">Plot</label>
+    {{ Form::text('plot',null,array('class'=>'form-control','id'=>'plot')) }}
 </div>
 
 <div class="form-group">

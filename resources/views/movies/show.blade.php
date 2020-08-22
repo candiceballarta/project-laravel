@@ -14,14 +14,14 @@
     <thead>
         <tr>
             <th>movies ID</th>
-            <th>Director</th>
+            <th>Plot</th>
             <th>Year</th>
         </tr>
     </thead>
     <tbody>
     <tr>
         <td>{{$movies->id}}</td>
-        <td>{{$movies->director}}</td>
+        <td>{{$movies->plot}}</td>
         <td>{{$movies->year}}</td>
     </tr>
     </tbody>

@@ -25,7 +25,7 @@
 
 <div class="form-group">
 <label for="artist" class="control-label">Plot</label>
-<input type="text" class="form-control " id="director" name="director" ></input>
+<input type="text" class="form-control " id="plot" name="plot" ></input>
 </div>
 
 <div class="form-group">
