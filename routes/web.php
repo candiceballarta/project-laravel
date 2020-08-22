@@ -23,3 +23,6 @@ Route::get('/', function () {
 
 Route::resource('movies','MoviesController');
 Route::resource('actors', 'ActorsController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
