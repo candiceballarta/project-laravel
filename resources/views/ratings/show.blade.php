@@ -20,7 +20,7 @@
     </thead>
     <tbody>
     <tr>
-        <td>{{$ratings->id}}</td>
+        <td>{{$ratings->rating_id}}</td>
         <td>{{$ratings->score}}</td>
     </tr>
     </tbody>
