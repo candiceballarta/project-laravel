@@ -28,7 +28,8 @@
             <td><a href="{{route('roles.show',$role->id)}}">{{$role->role_name}}</a></td>
             <td>{{$role->lname}}</td>
             <td align="center"><a href="{{ route('roles.edit',$role->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
-            <td align="center"><a href="{{ route('roles.destroy',$role->id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
+            <td align="center">{!! Form::open(array('route' => array('roles.destroy',$role->id),'method'=>'DELETE')) !!}
+            <button ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></i></button>
         @endforeach
     </tbody>
 </table>
