@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\ratings;
 
 class RatingsController extends Controller
 {
@@ -17,7 +21,9 @@ class RatingsController extends Controller
      */
     public function index()
     {
-        //
+        $ratings = ratings::all();
+        // dd($ratings);
+        return View::make('ratings.index',compact('ratings'));
     }
 
     /**
@@ -27,7 +33,7 @@ class RatingsController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('ratings.create');
     }
 
     /**
@@ -38,7 +44,14 @@ class RatingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = ['score'=>'required'];
+        $input = $request->all();
+        $validator = Validator::make($input, $rules);
+        if ($validator->passes()) {
+            ratings::create($input);
+            return Redirect::to('/ratings')->with('success','New Rating added!');
+        }
+        return redirect()->back()->withInput()->withErrors($validator);
     }
 
     /**
@@ -49,7 +62,9 @@ class RatingsController extends Controller
      */
     public function show($id)
     {
-        //
+        $ratings = ratings::find($id);
+        //dd($ratings);
+        return View::make('ratings.show',compact('ratings'));
     }
 
     /**
@@ -60,7 +75,9 @@ class RatingsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ratings = ratings::find($id);
+        //dd($ratings);
+        return View::make('ratings.edit',compact('ratings'));
     }
 
     /**
@@ -72,7 +89,9 @@ class RatingsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $ratings = ratings::find($request->id);
+        $ratings->update($request->all());
+        return Redirect::to('/ratings')->with('success','Rating updated!');
     }
 
     /**
@@ -83,6 +102,8 @@ class RatingsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ratings = ratings::find($id);
+        $ratings->delete();
+        return Redirect::to('/ratings')->with('success','Rating deleted!');
     }
 }
