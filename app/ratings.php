@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ratings extends Model
 {
-    protected $fillable = ['score', 'comment'];
+    protected $fillable = ['rating_id','id','score', 'comment'];
 }

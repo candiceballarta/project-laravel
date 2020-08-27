@@ -12,8 +12,8 @@
     </thead>
     <tbody>
     <tr>
-        <td>{{$producers->id}}</td>
-        <td>{{$producers->Company}}</td>
+        <td>{{$producers->producer_id}}</td>
+        <td>{{$producers->company}}</td>
     </tr>
     </tbody>
 </table>

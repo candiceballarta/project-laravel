@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class producers extends Model
 {
-    protected $fillable = ['fname', 'lname', 'company'];
+    protected $fillable = ['producer_id','fname', 'lname', 'company'];
 }

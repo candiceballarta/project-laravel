@@ -61,10 +61,10 @@ class ProducersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($producer_id)
     {
-        $producers = producers::find($id);
-        //dd($actors);
+        $producers = producers::find($producer_id);
+        dd($producers);
         return View::make('producers.show',compact('producers'));
     }
 

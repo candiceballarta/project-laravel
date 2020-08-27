@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class movies extends Model
 {
-    protected $fillable = ['title','plot','year'];
+    protected $fillable = ['movie_id','title','plot','year'];
     use SoftDeletes;
 }

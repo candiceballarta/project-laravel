@@ -85,14 +85,15 @@ class CreateProducerTable extends Migration
      * @return void
      */
     public function down()
-    {
-        Schema::dropIfExists('producers');
-        Schema::dropIfExists('roles');
+    {   
         Schema::dropIfExists('movies');
         Schema::dropIfExists('actors');
-        Schema::dropIfExists('genre');
-        Schema::dropIfExists('ratings');
         Schema::dropIfExists('movie_genres');
         Schema::dropIfExists('movie_ratings');
+        Schema::dropIfExists('producers');
+        Schema::dropIfExists('roles');
+        Schema::dropIfExists('genre');
+        Schema::dropIfExists('ratings');
+        
     }
 }
