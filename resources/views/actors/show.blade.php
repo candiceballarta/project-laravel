@@ -1,13 +1,5 @@
-<!-- resources/views/show.blade.php -->
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title></title>
-@extends('layouts.base')
-</head>
-<body>
-@section('body')
+@extends('layouts.app')
+@section('content')
 <h1>{{$actors->fname}}</h1>
 <h1>{{$actors->lname}}</h1>
 <div class="table-responsive">
@@ -28,5 +20,3 @@
 </div>
 </div>
 @endsection
-</body>
-</html>

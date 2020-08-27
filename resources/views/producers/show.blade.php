@@ -1,13 +1,5 @@
-<!-- resources/views/show.blade.php -->
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title></title>
-@extends('layouts.base')
-</head>
-<body>
-@section('body')
+@extends('layouts.app')
+@section('content')
 <h1>{{$producers->fname}}</h1>
 <h1>{{$producers->lname}}</h1>
 <div class="table-responsive">

@@ -1,13 +1,5 @@
-<!-- resources/views/index.blade.php -->
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title></title>
-@extends('layouts.base')
-</head>
-<body>
-@section('body')
+@extends('layouts.app')
+@section('content')
 <div class="container">
     <a href="{{route('genres.create')}}" class="btn btn-primary a-btn-slide-text">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -42,5 +34,3 @@
 </div>
 </div>
 @endsection
-</body>
-</html>

@@ -1,14 +1,5 @@
-<!-- resources/views/create.blade.php -->
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title></title>
-@extends('layouts.base')
-</head>
-<body>
-@section('body')
-
+@extends('layouts.app')
+@section('content')
 <div class="table-responsive">
 <table class="table table-striped table-hover">
 
