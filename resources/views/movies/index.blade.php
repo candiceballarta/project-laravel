@@ -25,9 +25,9 @@
         @foreach($movies as $movie)
         <tr>
         <td>{{$movie->id}}</td>
-            <td><a href="{{route('movies.show',$movie->id)}}">{{$movie->title}}</a></td>
-            <td align="center"><a href="{{ route('movies.edit',$movie->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
-            <td align="center"><a href="{{ route('movies.destroy',$movie->id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
+            <td><a href="{{route('movies.show',$movie->movie_id)}}">{{$movie->title}}</a></td>
+            <td align="center"><a href="{{ route('movies.edit',$movie->movie_id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
+            <td align="center"><a href="{{ route('movies.destroy',$movie->movie_id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
         @endforeach
     </tbody>
 </table>
