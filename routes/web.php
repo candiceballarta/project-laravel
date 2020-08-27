@@ -23,7 +23,10 @@ Route::get('/', function () {
 
 
 Auth::routes();
-
+Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('movies','MoviesController');
 Route::resource('actors', 'ActorsController');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('producers', 'ProducersController');
+Route::resource('genres', 'GenresController');
+Route::resource('ratings', 'RatingsController');
+Route::resource('roles', 'RolesController');
