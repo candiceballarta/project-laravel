@@ -23,7 +23,7 @@ class ProducersController extends Controller
     public function index()
     {
         $producers = producers::all();
-        // dd($producers);
+        //dd($producers);
         return View::make('producers.index',compact('producers'));
     }
 
@@ -61,10 +61,10 @@ class ProducersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($producer_id)
+    public function show($id)
     {
-        $producers = producers::find($producer_id);
-        dd($producers);
+        $producers = producers::find($id);
+        //dd($producers);
         return View::make('producers.show',compact('producers'));
     }
 
