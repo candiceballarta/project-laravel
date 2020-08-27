@@ -24,11 +24,11 @@
     <tbody>
         @foreach($producers as $producer)
         <tr>
-        <td>{{$producer->producer_id}}</td>
-            <td><a href="{{route('producers.show',$producer->producer_id)}}">{{$producer->fname}}</a></td>
+        <td>{{$producer->id}}</td>
+            <td><a href="{{route('producers.show',$producer->id)}}">{{$producer->fname}}</a></td>
             <td>{{$producer->lname}}</td>
-            <td align="center"><a href="{{ route('producers.edit',$producer->producer_id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
-            <td align="center"><a href="{{ route('producers.destroy',$producer->producer_id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
+            <td align="center"><a href="{{ route('producers.edit',$producer->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
+            <td align="center"><a href="{{ route('producers.destroy',$producer->id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
         @endforeach
     </tbody>
 </table>

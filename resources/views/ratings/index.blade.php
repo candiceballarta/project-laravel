@@ -26,9 +26,9 @@
         @foreach($ratings as $rating)
         <tr>
         <td>{{$rating->id}}</td>
-            <td><a href="{{route('ratings.show',$rating->rating_id)}}">{{$rating->score}}</a></td>
-            <td align="center"><a href="{{ route('ratings.edit',$rating->rating_id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
-            <td align="center"><a href="{{ route('ratings.destroy',$rating->rating_id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
+            <td><a href="{{route('ratings.show',$rating->id)}}">{{$rating->score}}</a></td>
+            <td align="center"><a href="{{ route('ratings.edit',$rating->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
+            <td align="center"><a href="{{ route('ratings.destroy',$rating->id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
         @endforeach
     </tbody>
 </table>

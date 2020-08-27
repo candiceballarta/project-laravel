@@ -12,7 +12,7 @@
     </thead>
     <tbody>
     <tr>
-        <td>{{$movies->movie_id}}</td>
+        <td>{{$movies->id}}</td>
         <td>{{$movies->plot}}</td>
         <td>{{$movies->year}}</td>
     </tr>

@@ -7,16 +7,16 @@
 <div class="container">
 
 <h2>Edit Rating</h2>
-{!! Form::model($ratings,['method'=>'PATCH','route' => ['ratings.update',$ratings->rating_id]]) !!}
+{!! Form::model($ratings,['method'=>'PATCH','route' => ['ratings.update',$ratings->id]]) !!}
 {{-- csrf_field() --}}
 {{-- method_field('PATCH') --}}
 
 <div class="form-group">
     <label for="score" class="control-label">Roles</label>
-    {{ Form::text('score',null,array('class'=>'form-control','rating_id'=>'score')) }}
+    {{ Form::text('score',null,array('class'=>'form-control','id'=>'score')) }}
 </div>
 
-    <input type="hidden"   name="rating_id" value="{{$ratings->rating_id}}">
+    <input type="hidden"   name="id" value="{{$ratings->id}}">
     <button type="submit" class="btn btn-primary">Update</button>
 <a href="{{url()->previous()}}" class="btn btn-default" role="button">Cancel</a>
 </div>
