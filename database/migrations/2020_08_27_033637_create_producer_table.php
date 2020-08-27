@@ -33,7 +33,7 @@ class CreateProducerTable extends Migration
             $table->mediumText('plot');
             $table->year('year');
             $table->integer('producer_id')->unsigned();
-            $table->foreign('producer_id')->references('producer_id')->on('producer');
+            $table->foreign('producer_id')->references('producer_id')->on('producers')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -44,7 +44,7 @@ class CreateProducerTable extends Migration
             $table->string('lname',16);
             $table->string('notes',50);
             $table->integer('role_id')->unsigned();
-            $table->foreign('role_id')->references('role_id')->on('roles');
+            $table->foreign('role_id')->references('role_id')->on('roles')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -57,24 +57,24 @@ class CreateProducerTable extends Migration
 
         Schema::create('movie_genres', function (Blueprint $table) {
             $table->integer('genre_id')->unsigned();
-            $table->foreign('genre_id')->references('genre_id')->on('genres');
+            $table->foreign('genre_id')->references('genre_id')->on('genres')->onDelete('cascade');
             $table->integer('movie_id')->unsigned();
-            $table->foreign('movie_id')->references('movie_id')->on('movies');
+            $table->foreign('movie_id')->references('movie_id')->on('movies')->onDelete('cascade');
         });
 
         Schema::create('ratings', function (Blueprint $table) {
             $table->increments('rating_id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('id')->unsigned();
+            $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
             $table->string('score',45);
             $table->timestamps();
         });
 
         Schema::create('movie_ratings', function (Blueprint $table) {
             $table->integer('movie_id')->unsigned();
-            $table->foreign('movie_id')->references('movie_id')->on('movies');
+            $table->foreign('movie_id')->references('movie_id')->on('movies')->onDelete('cascade');
             $table->integer('rating_id')->unsigned();
-            $table->foreign('rating_id')->references('rating_id')->on('ratings');
+            $table->foreign('rating_id')->references('rating_id')->on('ratings')->onDelete('cascade');
         });
 
     }
