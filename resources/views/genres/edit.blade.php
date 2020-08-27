@@ -20,13 +20,13 @@
 {{-- method_field('PATCH') --}}
 
 <div class="form-group">
-    <label for="genre_name" class="control-label">Genres</label>
-    {{ Form::text('genre_name',null,array('class'=>'form-control','id'=>'genre_name')) }}
+    <label for="genre_name" class="control-label">Genre Name</label>
+    {{ Form::text('genre_name',null,array('class'=>'form-control','genre_id'=>'genre_name')) }}
 </div>
 
-    <input type="hidden"   name="id" value="{{$genres->id}}">
+    <input type="hidden"   name="id" value="{{$genres->genre_id}}">
     <button type="submit" class="btn btn-primary">Update</button>
-<a href="{{url()->previous()}}" class="btn btn-default" genre="button">Cancel</a>
+<a href="{{url()->previous()}}" class="btn btn-default" role="button">Cancel</a>
 </div>
 </div>
 </form>

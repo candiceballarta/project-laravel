@@ -19,7 +19,7 @@
     </thead>
     <tbody>
     <tr>
-        <td>{{$genres->id}}</td>
+        <td>{{$genres->genre_id}}</td>
         <td>{{$genres->genre_name}}</td>
     </tr>
     </tbody>

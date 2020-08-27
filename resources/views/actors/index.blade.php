@@ -38,6 +38,8 @@
             <td>{{$actor->lname}}</td>
             <td align="center"><a href="{{ route('actors.edit',$actor->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
             <td align="center"><a href="{{ route('actors.destroy',$actor->id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
+            <td align="center">{!! Form::open(array('route' => array('actors.destroy', $actor->id),'method'=>'DELETE')) !!}
+            <button ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></i></button>
         @endforeach
     </tbody>
 </table>
