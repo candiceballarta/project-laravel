@@ -9,7 +9,7 @@
 <body>
 @section('body')
 <div class="container">
-    <a href="{{route('genres.create')}}" class="btn btn-primary a-btn-slide-text">
+    <a href="{{route('roles.create')}}" class="btn btn-primary a-btn-slide-text">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         <span><strong>ADD</strong></span>
     </a>
@@ -23,20 +23,20 @@
 <table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>Genre ID</th>
-            <th>Genre Name</th>
+            <th>Role ID</th>
+            <th>Role Name</th>
             <th>Edit</>
             <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($genres as $genre)
+        @foreach($roles as $role)
         <tr>
-        <td>{{$genre->id}}</td>
-            <td><a href="{{route('genres.show',$genre->id)}}">{{$genre->fname}}</a></td>
-            <td>{{$genre->lname}}</td>
-            <td align="center"><a href="{{ route('genres.edit',$genre->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
-            <td align="center"><a href="{{ route('genres.destroy',$genre->id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
+        <td>{{$role->id}}</td>
+            <td><a href="{{route('roles.show',$role->id)}}">{{$role->fname}}</a></td>
+            <td>{{$role->lname}}</td>
+            <td align="center"><a href="{{ route('roles.edit',$role->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
+            <td align="center"><a href="{{ route('roles.destroy',$role->id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
         @endforeach
     </tbody>
 </table>

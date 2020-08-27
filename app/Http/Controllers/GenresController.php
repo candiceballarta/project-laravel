@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\genres;
 
 class GenresController extends Controller
 {
@@ -13,7 +17,9 @@ class GenresController extends Controller
      */
     public function index()
     {
-        //
+        $genres = genres::all();
+        // dd($genres);
+        return View::make('genres.index',compact('genres'));
     }
 
     /**
@@ -23,7 +29,7 @@ class GenresController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('genres.create');
     }
 
     /**
@@ -34,7 +40,14 @@ class GenresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = ['genre_name'=>'required|max:16|alpha'];
+        $input = $request->all();
+        $validator = Validator::make($input, $rules);
+        if ($validator->passes()) {
+            genres::create($input);
+            return Redirect::to('/genres')->with('success','New Genre added!');
+        }
+        return redirect()->back()->withInput()->withErrors($validator);
     }
 
     /**
@@ -45,7 +58,9 @@ class GenresController extends Controller
      */
     public function show($id)
     {
-        //
+        $genres = genres::find($id);
+        //dd($genres);
+        return View::make('genres.show',compact('genres'));
     }
 
     /**
@@ -56,7 +71,9 @@ class GenresController extends Controller
      */
     public function edit($id)
     {
-        //
+        $genres = genres::find($id);
+        //dd($genres);
+        return View::make('genres.edit',compact('genres'));
     }
 
     /**
@@ -68,7 +85,9 @@ class GenresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $genres = genres::find($request->id);
+        $genres->update($request->all());
+        return Redirect::to('/genres')->with('success','Genre updated!');
     }
 
     /**
@@ -79,6 +98,8 @@ class GenresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $genres = genres::find($id);
+        $genres->delete();
+        return Redirect::to('/genres')->with('success','Genre deleted!');
     }
 }
