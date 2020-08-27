@@ -24,7 +24,7 @@
     {{ Form::text('score',null,array('class'=>'form-control','rating_id'=>'score')) }}
 </div>
 
-    <input type="hidden"   name="rating_id" value="{{$roles->rating_id}}">
+    <input type="hidden"   name="rating_id" value="{{$ratings->rating_id}}">
     <button type="submit" class="btn btn-primary">Update</button>
 <a href="{{url()->previous()}}" class="btn btn-default" role="button">Cancel</a>
 </div>
