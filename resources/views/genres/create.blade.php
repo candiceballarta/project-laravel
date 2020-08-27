@@ -11,7 +11,7 @@
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 <div class="form-group">
-    <label for="genre_name" class="control-label">Genres</label>
+    <label for="genre_name" class="control-label">Genre Name</label>
     <input type="text" class="form-control" id="genre_name" name="genre_name" value="{{old('genre_name')}}">
     @if($errors->has('genre_name'))
         <small>{{ $errors->first('genre_name') }}</small>

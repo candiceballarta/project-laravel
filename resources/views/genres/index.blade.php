@@ -34,8 +34,8 @@
         <tr>
         <td>{{$genre->genre_id}}</td>
             <td><a href="{{route('genres.show',$genre->genre_id)}}">{{$genre->genre_name}}</a></td>
-            <td align="center"><a href="{{ route('genres.edit',$actor->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
-            <td align="center"><a href="{{ route('genres.destroy',$actor->id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
+            <td align="center"><a href="{{ route('genres.edit',$genre->genre_id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
+            <td align="center"><a href="{{ route('genres.destroy',$genre->genre_id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
         @endforeach
     </tbody>
 </table>
