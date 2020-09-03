@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class genres extends Model
 {
-    protected $fillable = ['genre_id','genre_name'];
+    protected $fillable = ['genre_name'];
+    protected $primaryKey = 'genre_id';
 
     public function movies()
     {

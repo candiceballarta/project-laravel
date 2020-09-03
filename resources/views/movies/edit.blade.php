@@ -7,12 +7,12 @@
 <div class="container">
 
 <h2>Create New Movie</h2>
-{!! Form::model($movies,['method'=>'PATCH','route' => ['movies.update',$movies->id]]) !!}
-{{ csrf_field() }}
-{{ method_field('PATCH') }}
+{!! Form::model($movies,['method'=>'PATCH','route' => ['movies.update',$movies->movie_id]]) !!}
+{{-- {{ csrf_field() }}
+{{ method_field('PATCH') }} --}}
 
 <div class="form-group">
-    <label for="title" class="control-label">Title</label>
+    {{ Form::label('title', 'Title') }}
     {{ Form::text('title',null,array('class'=>'form-control','id'=>'title')) }}
     @if($errors->has('title'))
         <small>{{ $errors->first('title') }}</small>
@@ -20,7 +20,7 @@
 </div>
 
 <div class="form-group">
-    <label for="artist" class="control-label">Plot</label>
+    {{ Form::label('plot', 'Plot') }}
     {{ Form::text('plot',null,array('class'=>'form-control','id'=>'plot')) }}
     @if($errors->has('plot'))
         <small>{{ $errors->first('plot') }}</small>
@@ -28,7 +28,7 @@
 </div>
 
 <div class="form-group">
-    <label for="year" class="control-label">Year</label>
+    {{ Form::label('year', 'Year') }}
     {{ Form::text('year',null,array('class'=>'form-control','id'=>'year')) }}
     @if($errors->has('year'))
         <small>{{ $errors->first('year') }}</small>
@@ -36,14 +36,14 @@
 </div>
 
 <div class="form-group">
-    <label for="producer" class="control-label">Producer</label>
+    {{ Form::label('producer', 'Producer') }}
     {!! Form::select('producer_id',$producers, null,['class' => 'form-control']) !!}
     @if($errors->has('producer'))
         <small>{{ $errors->first('producer') }}</small>
     @endif
 </div>
 
-    <input type="hidden"   name="id" value="{{$movies->id}}">
+    <input type="hidden"   name="id" value="{{$movies->movie_id}}">
     <button type="submit" class="btn btn-primary">Update</button>
 <a href="{{url()->previous()}}" class="btn btn-default" role="button">Cancel</a>
 </div>

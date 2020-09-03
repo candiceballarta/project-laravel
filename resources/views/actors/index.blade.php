@@ -27,16 +27,18 @@
     <tbody>
         @foreach($actors as $actor)
         <tr>
-        <td>{{$actor->id}}</td>
-            <td><a href="{{route('actors.show',$actor->id)}}">{{$actor->fname}}</a></td>
+            <td>{{$actor->actor_id}}</td>
+            <td><a href="{{route('actors.show',$actor->actor_id)}}">{{$actor->fname}}</a></td>
             <td>{{$actor->lname}}</td>
             <td>{{$actor->notes}}</td>
-            <td align="center"><a href="{{ route('actors.edit',$actor->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
-            <td align="center"><a href="{{ route('actors.destroy',$actor->id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
-            <td align="center">{!! Form::open(array('route' => array('actors.destroy', $actor->id),'method'=>'DELETE')) !!}
-            <button ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></i></button>
-            <td align="center"><a href="{{ route('movies.restore',$movie->id) }}" ><i class="fa fa-undo" style="font-size:24px; color:red" ></i></a></td>
-            </tr>
+
+            <td align="center">{!! Form::open(array('route' => array('actors.edit', $actor->actor_id),'method' => 'GET')) !!}
+                <button><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px; color:blue" ></i></button></td>
+            <td align="center">{!! Form::open(array('route' => array('actors.destroy', $actor->actor_id),'method'=>'DELETE')) !!}
+                <button ><i class="fa fa-trash-o" aria-hidden="true" style="font-size:24px; color:red" ></i></button></td>
+            <td align="center">{!! Form::open(array('route' => array('actor.restore', $actor->actor_id), 'method'=>'GET')) !!}
+                <button><i class="fa fa-undo" aria-hidden="true" style="font-size:24px; color:green" ></i></button></td>
+        </tr>
         @endforeach
     </tbody>
 </table>

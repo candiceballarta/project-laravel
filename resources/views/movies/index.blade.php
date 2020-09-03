@@ -26,14 +26,21 @@
     <tbody>
         @foreach($movies as $movie)
         <tr>
-            <td>{{$movie->id}}</td>
-            <td><a href="{{route('movies.show',$movie->id)}}">{{$movie->title}}</a></td>
+            <td>{{$movie->movie_id}}</td>
+            <td><a href="{{route('movies.show',$movie->movie_id)}}">{{$movie->title}}</a></td>
             <td>{{ $movie->fname." ".$movie->lname }}</td>
-            <td align="center"><a href="{{ route('movies.edit',$movie->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
-            <td align="center">{!! Form::open(array('route' => array('movies.destroy',$movie->id),'method'=>'DELETE')) !!}
-            <button ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></i></button>
-            <td align="center"><a href="{{ route('movies.restore',$movie->id) }}" ><i class="fa fa-undo" style="font-size:24px; color:red" ></i></a></td>
-            </tr>
+
+            <td align="center">{!! Form::open(array('route' => array('movies.edit',$movie->movie_id),'method'=>'GET')) !!}
+                <button><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px; color:blue" ></i></button></td>
+            {!! Form::close() !!}
+            <td align="center">{!! Form::open(array('route' => array('movies.destroy',$movie->movie_id),'method'=>'DELETE')) !!}
+                <button ><i class="fa fa-trash-o" aria-hidden="true" style="font-size:24px; color:red" ></i></button></td>
+            {!! Form::close() !!}
+            <td align="center">{!! Form::open(array('route' => array('movies.restore', $movie->movie_id), 'method'=>'GET')) !!}
+                <button><i class="fa fa-undo" aria-hidden="true" style="font-size:24px; color:green" ></i></button></td>
+            {!! Form::close() !!}
+        </tr>
+        
         @endforeach
     </tbody>
 </table>

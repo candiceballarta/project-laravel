@@ -12,10 +12,16 @@ use App\producers;
 class MoviesController extends Controller
 {
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['index','show']]);
     }
+    
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +29,7 @@ class MoviesController extends Controller
      */
     public function index()
     {   
-        $movies = DB::table('movies')->leftJoin('producers','movies.producer_id','=','producers.producer_id')->get()->paginate(10);
+        $movies = DB::table('movies')->leftJoin('producers','movies.producer_id','=','producers.producer_id')->get();
         //$movies = movies::withTrashed()->paginate(10);
         //dd($movies);
         return View::make('movies.index',compact('movies'));

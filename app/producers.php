@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class producers extends Model
 {
-    protected $fillable = ['producer_id','fname', 'lname', 'company'];
+    protected $fillable = ['fname', 'lname', 'company'];
+    protected $primaryKey = 'producer_id';
 
     public function movies()
     {

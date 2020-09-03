@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ratings extends Model
 {
-    protected $fillable = ['rating_id','id','score', 'comment'];
+    protected $fillable = ['score', 'comment'];
+    protected $primaryKey = 'rating_id';
 
     public function movies()
     {

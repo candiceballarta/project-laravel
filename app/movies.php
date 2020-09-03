@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class movies extends Model
 {
-    protected $fillable = ['movie_id','title','plot','year', 'producer_id'];
+    protected $fillable = ['title','plot','year', 'producer_id'];
+    protected $primaryKey = 'movie_id';
     use SoftDeletes;
 
     public function producers()

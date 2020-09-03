@@ -12,24 +12,24 @@
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 <div class="form-group">
-    <label for="title" class="control-label">Title</label>
-    <input type="text" class="form-control" id="title" name="title" value="{{old('title')}}">
+    {{ Form::label('title', 'Title') }}
+    {{ Form::text('title',old('title'),array('class'=>'form-control')) }}
     @if($errors->has('title'))
         <small>{{ $errors->first('title') }}</small>
     @endif
 </div>
 
 <div class="form-group">
-    <label for="artist" class="control-label">Plot</label>
-    <input type="text" class="form-control " id="plot" name="plot" value="{{old('plot')}}"></input>
+    {{ Form::label('plot', 'Plot') }}
+    {{ Form::text('plot',old('plot'),array('class'=>'form-control')) }}
     @if($errors->has('plot'))
         <small>{{ $errors->first('plot') }}</small>
     @endif
 </div>
 
 <div class="form-group">
-    <label for="year" class="control-label">Year</label>
-    <input type="text" class="form-control" id="year" name="year"  value="{{old('year')}}">
+    {{ Form::label('year', 'Year') }}
+    {{ Form::text('year',old('year'),array('class'=>'form-control')) }}
     @if($errors->has('year'))
         <small>{{ $errors->first('year') }}</small>
     @endif
