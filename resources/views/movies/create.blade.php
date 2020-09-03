@@ -34,6 +34,15 @@
     @endif
 </div>
 
+<div class="form-group">
+    <label for="year" class="control-label">Year</label>
+    <input type="text" class="form-control" id="year" name="year"  value="{{old('year')}}">
+    @if($errors->has('year'))
+        <small>{{ $errors->first('year') }}</small>
+    @endif
+</div>
+
+
 <button type="submit" class="btn btn-primary">Save</button>
 <a href="{{url()->previous()}}" class="btn btn-default" role="button">Cancel</a>
 </div>

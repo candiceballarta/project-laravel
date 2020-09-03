@@ -33,7 +33,7 @@ class CreateProducerTable extends Migration
             $table->mediumText('plot');
             $table->year('year');
             $table->bigInteger('producer_id')->unsigned();
-            $table->foreign('producer_id')->references('id')->on('producers')->onDelete('cascade');
+            $table->foreign('producer_id')->references('id')->on('producers')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -43,10 +43,17 @@ class CreateProducerTable extends Migration
             $table->string('fname',16);
             $table->string('lname',16);
             $table->string('notes',50);
-            $table->bigInteger('role_id')->unsigned();
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::create('movie_actors', function (Blueprint $table) {
+            $table->bigInteger('movie_id')->unsigned();
+            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('actor_id')->unsigned();
+            $table->foreign('actor_id')->references('id')->on('actors')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('role_id')->unsigned();
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
         });
 
         Schema::create('genres', function (Blueprint $table) {
@@ -57,24 +64,25 @@ class CreateProducerTable extends Migration
 
         Schema::create('movie_genres', function (Blueprint $table) {
             $table->bigInteger('genre_id')->unsigned();
-            $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
+            $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('movie_id')->unsigned();
-            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
+            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade')->onUpdate('cascade');
         });
 
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('score',45);
+            $table->text('comment');
             $table->timestamps();
         });
 
         Schema::create('movie_ratings', function (Blueprint $table) {
             $table->bigInteger('movie_id')->unsigned();
-            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
+            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('rating_id')->unsigned();
-            $table->foreign('rating_id')->references('id')->on('ratings')->onDelete('cascade');
+            $table->foreign('rating_id')->references('id')->on('ratings')->onDelete('cascade')->onUpdate('cascade');
         });
 
     }
@@ -89,6 +97,7 @@ class CreateProducerTable extends Migration
         
         Schema::dropIfExists('movie_genres');
         Schema::dropIfExists('movie_ratings');
+        Schema::dropIfExists('movie_actors');
         Schema::dropIfExists('movies');
         Schema::dropIfExists('actors');
         Schema::dropIfExists('producers');
