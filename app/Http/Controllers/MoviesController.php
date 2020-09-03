@@ -49,14 +49,14 @@ class MoviesController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        //$rules = ['title' =>'required|max:45','plot'=>'required','year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"), 'producer_id' => 'integer'];
+        $rules = ['title' =>'required|max:45','plot'=>'required','year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"), 'producer_id' => 'integer'];
         $input = $request->all();
-        //$validator = Validator::make($input, $rules);
-        //if ($validator->passes()) {
+        $validator = Validator::make($input, $rules);
+        if ($validator->passes()) {
             movies::create($input);
             return Redirect::to('/movies')->with('success','New Movie added!');
-        //}
-        //return redirect()->back()->withInput()->withErrors($validator);
+        }
+        return redirect()->back()->withInput()->withErrors($validator);
     }
 
     /**
