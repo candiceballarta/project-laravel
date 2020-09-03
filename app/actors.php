@@ -10,8 +10,13 @@ class actors extends Model
     protected $fillable = ['actor_id','fname', 'lname', 'notes'];
     use SoftDeletes;
 
-    public function artist()
+    // public function movies()
+    // {
+    //     return $this->belongsToMany('App\movies');
+    // }
+
+    public function roles()
     {
-        return $this->belongsTo('App\movies');
+        return $this->morphMany('App\roles', 'movie_actors');
     }
 }

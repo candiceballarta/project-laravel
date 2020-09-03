@@ -10,8 +10,23 @@ class movies extends Model
     protected $fillable = ['movie_id','title','plot','year', 'producer_id'];
     use SoftDeletes;
 
-    public function movies()
+    public function producers()
     {
-        return $this->hasMany('App\actors');
+        return $this->belongsTo('App\producers');
+    }
+
+    public function ratings()
+    {
+        return $this->belongsToMany('App\ratings');
+    }
+
+    public function genre()
+    {
+        return $this->belongsToMany('App\genre');
+    }
+
+    public function roles()
+    {
+        return $this->morphMany('App\roles', 'movie_actors');
     }
 }
