@@ -8,12 +8,14 @@
             <th>User ID</th>
             <th>Rating ID</th>
             <th>Score</th>
+
         </tr>
     </thead>
     <tbody>
     <tr>
         <td>{{$ratings->id}}</td>
         <td>{{$ratings->score}}</td>
+        <td>{{$ratings->comment}}</td>
     </tr>
     </tbody>
 </table>
