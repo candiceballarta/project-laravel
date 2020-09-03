@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/email', function () {
+    Mail::to('head@email.com')->send(new WelcomeMail());
+
+    return new WelcomeMail();
+});
+
 // Route::get('/uwu', function () {
 //     return "Hemlo boi~";
 // });
@@ -30,3 +38,4 @@ Route::resource('producers', 'ProducersController');
 Route::resource('genres', 'GenresController');
 Route::resource('ratings', 'RatingsController');
 Route::resource('roles', 'RolesController');
+
