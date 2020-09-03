@@ -7,7 +7,7 @@
 <div class="container">
 
 <h2>Create New Genre</h2>
-<form method="post" action="{{url('roles')}}" >
+<form method="post" action="{{url('genres')}}" >
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 <div class="form-group">

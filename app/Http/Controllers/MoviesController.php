@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\movies;
+use App\producers;
 
 class MoviesController extends Controller
 {
@@ -21,8 +22,9 @@ class MoviesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $movies = movies::all();
+    {   
+        $movies = DB::table('movies')->leftJoin('producers','movies.producer_id','=','producers.producer_id')->get()->paginate(10);
+        //$movies = movies::withTrashed()->paginate(10);
         //dd($movies);
         return View::make('movies.index',compact('movies'));
     }
@@ -33,8 +35,9 @@ class MoviesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return View::make('movies.create');
+    {   
+        $producers = producers::pluck('fname','producer_id');
+        return View::make('movies.create',compact('producers'));
     }
 
     /**
@@ -46,14 +49,14 @@ class MoviesController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        $rules = ['title' =>'required|max:45','plot'=>'required','year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"), 'producer_id' => 'integer'];
+        //$rules = ['title' =>'required|max:45','plot'=>'required','year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"), 'producer_id' => 'integer'];
         $input = $request->all();
-        $validator = Validator::make($input, $rules);
-        if ($validator->passes()) {
+        //$validator = Validator::make($input, $rules);
+        //if ($validator->passes()) {
             movies::create($input);
             return Redirect::to('/movies')->with('success','New Movie added!');
-        }
-        return redirect()->back()->withInput()->withErrors($validator);
+        //}
+        //return redirect()->back()->withInput()->withErrors($validator);
     }
 
     /**
@@ -78,8 +81,9 @@ class MoviesController extends Controller
     public function edit($id)
     {
         $movies = movies::find($id);
+        $producers = producers::pluck('fname','producer_id');
         //dd($movies);
-        return View::make('movies.edit',compact('movies'));
+        return View::make('movies.edit',compact('movies','producers'));
     }
 
     /**
@@ -110,8 +114,14 @@ class MoviesController extends Controller
      */
     public function destroy($id)
     {
-        $movies = movies::find($id);
+        $movies = movies::findOrFail($id);
         $movies->delete();
         return Redirect::to('/movies')->with('success','Movie deleted!');
+    }
+
+    public function restore($id) 
+    {
+        movies::withTrashed()->where('id',$id)->restore();
+        return Redirect::route('movies.index')->with('success','Movie restored successfully!');
     }
 }

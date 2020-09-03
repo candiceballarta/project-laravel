@@ -35,9 +35,21 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item"><a class="nav-link">Home</a></li>
-                    </ul>
+                    @guest
+                        <ul class="navbar-nav mx-auto">
+                            
+                        </ul>
+                    @else
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item"><a class="nav-link">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url('/movies') }}">Movies</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url('/actors') }}">Actors</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url('/producers') }}">Producers</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url('/genres') }}">Genre</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url('/roles') }}">Roles</a></li>
+                        </ul>
+                    @endguest
+                    
 
 
 
