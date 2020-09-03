@@ -44,7 +44,7 @@ class RatingsController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = ['score'=>'required'];
+        $rules = ['score'=>'required','comment'=>'required|max:350|alpha_num'];
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {

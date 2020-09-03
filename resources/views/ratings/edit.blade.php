@@ -16,6 +16,11 @@
     {{ Form::text('score',null,array('class'=>'form-control','id'=>'score')) }}
 </div>
 
+<div class="form-group">
+    <label for="comment" class="control-label">Comment</label>
+    {{ Form::text('comment',null,array('class'=>'form-control','id'=>'comment')) }}
+</div>
+
     <input type="hidden"   name="id" value="{{$ratings->id}}">
     <button type="submit" class="btn btn-primary">Update</button>
 <a href="{{url()->previous()}}" class="btn btn-default" role="button">Cancel</a>

@@ -18,6 +18,14 @@
     @endif
 </div>
 
+<div class="form-group">
+    <label for="score" class="control-label">Comment</label>
+    <input type="text" class="form-control " id="comment" name="comment" value="{{old('comment')}}">
+    @if($errors->has('comment'))
+        <small>{{ $errors->first('comment') }}</small>
+    @endif
+</div>
+
 <button type="submit" class="btn btn-primary">Save</button>
 <a href="{{url()->previous()}}" class="btn btn-default" role="button">Cancel</a>
 </div>

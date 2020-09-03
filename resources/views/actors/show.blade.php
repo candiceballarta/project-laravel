@@ -7,12 +7,16 @@
     <thead>
         <tr>
             <th>Actor ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
             <th>Notes</th>
         </tr>
     </thead>
     <tbody>
     <tr>
         <td>{{$actors->id}}</td>
+        <td>{{$actors->fname}}</td>
+        <td>{{$actors->lname}}</td>
         <td>{{$actors->notes}}</td>
     </tr>
     </tbody>
