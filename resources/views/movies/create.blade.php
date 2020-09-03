@@ -7,6 +7,7 @@
 <div class="container">
 
 <h2>Create New Movie</h2>
+{{-- dd($producers) --}}
 <form method="post" action="{{url('movies')}}" >
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -35,10 +36,10 @@
 </div>
 
 <div class="form-group">
-    <label for="year" class="control-label">Year</label>
-    <input type="text" class="form-control" id="year" name="year"  value="{{old('year')}}">
-    @if($errors->has('year'))
-        <small>{{ $errors->first('year') }}</small>
+    <label for="producer" class="control-label">Producer</label>
+    {!! Form::select('producer_id',$producers, null,['class' => 'form-control']) !!}
+    @if($errors->has('producer'))
+        <small>{{ $errors->first('producer') }}</small>
     @endif
 </div>
 

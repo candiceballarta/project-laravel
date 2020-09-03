@@ -21,6 +21,7 @@
             <th>Notes</th>
             <th>Edit</>
             <th>Delete</th>
+            <th>Restore</th>
         </tr>
     </thead>
     <tbody>
@@ -34,6 +35,8 @@
             <td align="center"><a href="{{ route('actors.destroy',$actor->id) }}"  ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></a></i></td>
             <td align="center">{!! Form::open(array('route' => array('actors.destroy', $actor->id),'method'=>'DELETE')) !!}
             <button ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></i></button>
+            <td align="center"><a href="{{ route('movies.restore',$movie->id) }}" ><i class="fa fa-undo" style="font-size:24px; color:red" ></i></a></td>
+            </tr>
         @endforeach
     </tbody>
 </table>

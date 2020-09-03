@@ -9,4 +9,9 @@ class actors extends Model
 {
     protected $fillable = ['actor_id','fname', 'lname', 'notes'];
     use SoftDeletes;
+
+    public function artist()
+    {
+        return $this->belongsTo('App\movies');
+    }
 }

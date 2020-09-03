@@ -108,4 +108,10 @@ class ActorsController extends Controller
         $actors->delete();
         return Redirect::to('/actors')->with('success','Actor deleted!');
     }
+
+    public function restore($id) 
+    {
+        movies::withTrashed()->where('id',$id)->restore();
+        return Redirect::route('movies.index')->with('success','Movie restored successfully!');
+    }
 }

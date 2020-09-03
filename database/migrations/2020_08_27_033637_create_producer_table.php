@@ -14,7 +14,7 @@ class CreateProducerTable extends Migration
     public function up()
     {   
         Schema::create('producers', function (Blueprint $table) {
-            $table->id();
+            $table->id('producer_id');
             $table->string('fname',16);
             $table->string('lname',16);
             $table->string('company',45);
@@ -33,7 +33,7 @@ class CreateProducerTable extends Migration
             $table->mediumText('plot');
             $table->year('year');
             $table->bigInteger('producer_id')->unsigned();
-            $table->foreign('producer_id')->references('id')->on('producers')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('producer_id')->references('producer_id')->on('producers')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -8,8 +8,8 @@
 
 <h2>Create New Movie</h2>
 {!! Form::model($movies,['method'=>'PATCH','route' => ['movies.update',$movies->id]]) !!}
-{{-- csrf_field() --}}
-{{-- method_field('PATCH') --}}
+{{ csrf_field() }}
+{{ method_field('PATCH') }}
 
 <div class="form-group">
     <label for="title" class="control-label">Title</label>
@@ -32,6 +32,14 @@
     {{ Form::text('year',null,array('class'=>'form-control','id'=>'year')) }}
     @if($errors->has('year'))
         <small>{{ $errors->first('year') }}</small>
+    @endif
+</div>
+
+<div class="form-group">
+    <label for="producer" class="control-label">Producer</label>
+    {!! Form::select('producer_id',$producers, null,['class' => 'form-control']) !!}
+    @if($errors->has('producer'))
+        <small>{{ $errors->first('producer') }}</small>
     @endif
 </div>
 

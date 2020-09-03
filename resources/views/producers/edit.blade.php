@@ -15,7 +15,7 @@
 <div class="container">
 
 <h2>Edit Actor</h2>
-{!! Form::model($producers,['method'=>'PATCH','route' => ['producers.update',$producers->id]]) !!}
+{!! Form::model($producers,['method'=>'PATCH','route' => ['producers.update',$producers->producer_id]]) !!}
 {{-- csrf_field() --}}
 {{-- method_field('PATCH') --}}
 
@@ -34,7 +34,7 @@
     {{ Form::text('company',null,array('class'=>'form-control','id'=>'company')) }}
 </div>
 
-    <input type="hidden"   name="id" value="{{$producers->id}}">
+    <input type="hidden"   name="id" value="{{$producers->producer_id}}">
     <button type="submit" class="btn btn-primary">Update</button>
 <a href="{{url()->previous()}}" class="btn btn-default" role="button">Cancel</a>
 </div>
