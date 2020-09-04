@@ -16,7 +16,7 @@
     {{ Form::text('role_name',null,array('class'=>'form-control','roles_id'=>'role_name')) }}
 </div>
 
-    <input type="hidden"   name="roles_id" value="{{$roles->id}}">
+    <input type="hidden"   name="roles_id" value="{{$roles->role_id}}">
     <button type="submit" class="btn btn-primary">Update</button>
 <a href="{{url()->previous()}}" class="btn btn-default" role="button">Cancel</a>
 </div>

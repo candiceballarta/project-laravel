@@ -5,14 +5,14 @@
 <table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>movies ID</th>
+            <th>Movies ID</th>
             <th>Plot</th>
             <th>Year</th>
         </tr>
     </thead>
     <tbody>
     <tr>
-        <td>{{$movies->id}}</td>
+        <td>{{$movies->movie_id}}</td>
         <td>{{$movies->plot}}</td>
         <td>{{$movies->year}}</td>
     </tr>

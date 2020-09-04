@@ -26,7 +26,8 @@ class GenresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        //$genres = DB::table('genres')->leftJoin('movie_genres','genre.genre_id','=','movie_genres.genre_id')->leftJoin('movies','movies.movie_id','=','movie_genres.movie_id')->select('genres.genre_id','genres.name','movies.title')->get();
         $genres = genres::all();
         // dd($genres);
         return View::make('genres.index',compact('genres'));
@@ -68,6 +69,7 @@ class GenresController extends Controller
      */
     public function show($id)
     {
+        //$genres = DB::table('genres')->leftJoin('movie_genres','genre.genre_id','=','movie_genres.genre_id')->leftJoin('movies','movies.movie_id','=','movie_genres.movie_id')->select('genres.genre_id','genres.genre_name','movies.title')->get();
         $genres = genres::find($id);
         //dd($genres);
         return View::make('genres.show',compact('genres'));

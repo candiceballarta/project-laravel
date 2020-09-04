@@ -117,7 +117,7 @@ class ActorsController extends Controller
 
     public function restore($id) 
     {
-        movies::withTrashed()->where('id',$id)->restore();
-        return Redirect::route('movies.index')->with('success','Movie restored successfully!');
+        actors::withTrashed()->where('actor_id',$id)->restore();
+        return Redirect::route('actors.index')->with('success','Actors restored successfully!');
     }
 }

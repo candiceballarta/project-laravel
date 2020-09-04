@@ -11,7 +11,7 @@
     </thead>
     <tbody>
     <tr>
-        <td>{{$roles->id}}</td>
+        <td>{{$roles->role_id}}</td>
         <td>{{$roles->role_name}}</td>
     </tr>
     </tbody>

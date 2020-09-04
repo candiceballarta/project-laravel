@@ -11,6 +11,6 @@ class producers extends Model
 
     public function movies()
     {
-        return $this->hasMany('App\movies');
+        return $this->hasMany('App\movies', 'movie_id');
     }
 }

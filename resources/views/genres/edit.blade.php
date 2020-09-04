@@ -6,7 +6,7 @@
 <div class="container">
 
 <h2>Edit Genre</h2>
-{!! Form::model($genres,['method'=>'PATCH','route' => ['genres.update',$genres->id]]) !!}
+{!! Form::model($genres,['method'=>'PATCH','route' => ['genres.update',$genres->genre_id]]) !!}
 {{-- csrf_field() --}}
 {{-- method_field('PATCH') --}}
 

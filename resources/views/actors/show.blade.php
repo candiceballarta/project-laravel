@@ -14,7 +14,7 @@
     </thead>
     <tbody>
     <tr>
-        <td>{{$actors->id}}</td>
+        <td>{{$actors->actor_id}}</td>
         <td>{{$actors->fname}}</td>
         <td>{{$actors->lname}}</td>
         <td>{{$actors->notes}}</td>

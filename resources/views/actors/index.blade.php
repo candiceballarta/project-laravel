@@ -32,11 +32,11 @@
             <td>{{$actor->lname}}</td>
             <td>{{$actor->notes}}</td>
 
-            <td align="center">{!! Form::open(array('route' => array('actors.edit', $actor->actor_id),'method' => 'GET')) !!}
-                <button><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px; color:blue" ></i></button></td>
-            <td align="center">{!! Form::open(array('route' => array('actors.destroy', $actor->actor_id),'method'=>'DELETE')) !!}
+            <td>{!! Form::open(array('route' => array('actors.edit', $actor->actor_id),'method' => 'GET')) !!}
+                <button><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px; color:yellow" ></i></button></td>
+            <td>{!! Form::open(array('route' => array('actors.destroy', $actor->actor_id),'method'=>'DELETE')) !!}
                 <button ><i class="fa fa-trash-o" aria-hidden="true" style="font-size:24px; color:red" ></i></button></td>
-            <td align="center">{!! Form::open(array('route' => array('actor.restore', $actor->actor_id), 'method'=>'GET')) !!}
+            <td>{!! Form::open(array('route' => array('actors.restore', $actor->actor_id), 'method'=>'GET')) !!}
                 <button><i class="fa fa-undo" aria-hidden="true" style="font-size:24px; color:green" ></i></button></td>
         </tr>
         @endforeach

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\producers;
+use App\movies;
 
 class ProducersController extends Controller
 {

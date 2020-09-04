@@ -12,11 +12,11 @@ class ratings extends Model
 
     public function movies()
     {
-        return $this->belongsToMany('App\movies');
+        return $this->belongsToMany('App\movies', 'movie_id');
     }
 
     public function users()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'id');
     }
 }

@@ -29,9 +29,13 @@ class MoviesController extends Controller
      */
     public function index()
     {   
-        $movies = DB::table('movies')->leftJoin('producers','movies.producer_id','=','producers.producer_id')->get();
-        //$movies = movies::withTrashed()->paginate(10);
+        //$movies = DB::table('movies')->leftJoin('producers','movies.producer_id','=','producers.producer_id')->get();
+        //$movies = movies::all();
+        $movies = movies::with('producers')->get();
         //dd($movies);
+        // foreach ($movies as $movie) {
+        //     dump($movie->producers);
+        // }
         return View::make('movies.index',compact('movies'));
     }
 
@@ -127,7 +131,7 @@ class MoviesController extends Controller
 
     public function restore($id) 
     {
-        movies::withTrashed()->where('id',$id)->restore();
+        movies::withTrashed()->where('movie_id',$id)->restore();
         return Redirect::route('movies.index')->with('success','Movie restored successfully!');
     }
 }

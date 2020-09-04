@@ -39,3 +39,4 @@ Route::resource('genres', 'GenresController');
 Route::resource('ratings', 'RatingsController');
 Route::resource('roles', 'RolesController');
 Route::get('/movies/restore/{id}',['uses' => 'MoviesController@restore','as' => 'movies.restore']);
+Route::get('/actors/restore/{id}',['uses' => 'ActorsController@restore','as' => 'actors.restore']);

@@ -24,11 +24,15 @@
     <tbody>
         @foreach($genres as $genre)
         <tr>
-        <td>{{$genre->id}}</td>
-            <td><a href="{{route('genres.show',$genre->id)}}">{{$genre->genre_name}}</a></td>
-            <td align="center"><a href="{{ route('genres.edit',$genre->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
-            <td align="center">{!! Form::open(array('route' => array('genres.destroy',$genre->id),'method'=>'DELETE')) !!}
-            <button ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></i></button>
+            <td>{{$genre->genre_id}}</td>
+            <td><a href="{{route('genres.show',$genre->genre_id)}}">{{$genre->genre_name}}</a></td>
+
+            <td>{!! Form::open(array('route'=> array('genres.edit', $genre->genre_id), 'method'=>'GET')) !!}
+                <button><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px; color:yellow" ></i></button></td>
+            {!! Form::close() !!}
+            <td>{!! Form::open(array('route' => array('genres.destroy',$genre->genre_id),'method'=>'DELETE')) !!}
+                <button><i class="fa fa-trash-o" style="font-size:24px; color:red" ></i></button></td>
+            {!! Form::close() !!}
         @endforeach
     </tbody>
 </table>
