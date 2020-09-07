@@ -40,3 +40,5 @@ Route::resource('ratings', 'RatingsController');
 Route::resource('roles', 'RolesController');
 Route::get('/movies/restore/{id}',['uses' => 'MoviesController@restore','as' => 'movies.restore']);
 Route::get('/actors/restore/{id}',['uses' => 'ActorsController@restore','as' => 'actors.restore']);
+Route::get('/contact', 'ContactFormController@create')->name('contact');
+Route::post('/contact', 'ContactFormController@store');

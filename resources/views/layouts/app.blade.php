@@ -19,8 +19,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
-    
+
+
 </head>
 <body>
     <div id="app">
@@ -37,19 +37,20 @@
                     <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mx-auto">
                             <li class="nav-item"><a class="nav-link">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Contact Us</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ url('/movies') }}">Movies</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ url('/actors') }}">Actors</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ url('/producers') }}">Producers</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ url('/genres') }}">Genre</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ url('/roles') }}">Roles</a></li>
                         </ul>
-                    
+
 
 
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        
+
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
