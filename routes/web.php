@@ -42,3 +42,7 @@ Route::get('/movies/restore/{id}',['uses' => 'MoviesController@restore','as' => 
 Route::get('/actors/restore/{id}',['uses' => 'ActorsController@restore','as' => 'actors.restore']);
 Route::get('/contact', 'ContactFormController@create')->name('contact');
 Route::post('/contact', 'ContactFormController@store');
+Route::get('/movieactors/create', ['uses' => 'MovieActorController@create', 'as' => 'movieactors.create']);
+Route::post('/movieactors', ['uses' => 'MovieActorController@store']);
+Route::get('/movieactors/edit/{id}', ['uses' => 'MovieActorController@edit', 'as' => 'movieactors.edit']);
+Route::resource('image', 'ImageController');

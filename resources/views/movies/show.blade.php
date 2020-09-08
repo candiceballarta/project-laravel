@@ -18,6 +18,10 @@
     </tr>
     </tbody>
 </table>
+
+<div class="logo">
+    <img src="{{ $movies->getFirstMediaUrl('poster') }}" alt="movie-poster" width="150" height="150">
+</div>
 </div>
 </div>
 @endsection

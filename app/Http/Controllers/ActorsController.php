@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\actors;
+use App\movie_actors;
 
 class ActorsController extends Controller
 {
@@ -70,7 +71,8 @@ class ActorsController extends Controller
      */
     public function show($id)
     {
-        $actors = actors::find($id);
+        $actors = actors::where('actor_id', '=', $id)->with('movies', 'roles')->get();
+        //$actors = actors::with('movies')->find($id);
         //dd($actors);
         return View::make('actors.show',compact('actors'));
     }
@@ -115,7 +117,7 @@ class ActorsController extends Controller
         return Redirect::to('/actors')->with('success','Actor deleted!');
     }
 
-    public function restore($id) 
+    public function restore($id)
     {
         actors::withTrashed()->where('actor_id',$id)->restore();
         return Redirect::route('actors.index')->with('success','Actors restored successfully!');

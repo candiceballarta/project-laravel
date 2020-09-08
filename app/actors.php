@@ -11,13 +11,13 @@ class actors extends Model
     protected $primaryKey = 'actor_id';
     use SoftDeletes;
 
-    // public function movies()
-    // {
-    //     return $this->belongsToMany('App\movies');
-    // }
+    public function movies()
+    {
+        return $this->belongsToMany('App\movies', 'movie_actors', 'actor_id', 'movie_id');
+    }
 
     public function roles()
     {
-        return $this->morphMany('App\roles', 'movie_actors');
+        return $this->belongsToMany('App\roles', 'movie_actors', 'actor_id', 'role_id');
     }
 }

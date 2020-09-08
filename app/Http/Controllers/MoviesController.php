@@ -21,14 +21,14 @@ class MoviesController extends Controller
     {
         $this->middleware('auth', ['except' => ['index','show']]);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         //$movies = DB::table('movies')->leftJoin('producers','movies.producer_id','=','producers.producer_id')->get();
         //$movies = movies::all();
         $movies = movies::with('producers')->get();
@@ -45,7 +45,7 @@ class MoviesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
         $producers = producers::pluck('fname','producer_id');
         return View::make('movies.create',compact('producers'));
     }
@@ -59,11 +59,12 @@ class MoviesController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        $rules = ['title' =>'required|max:45','plot'=>'required','year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"), 'producer_id' => 'integer'];
+        $rules = ['title' =>'required|max:45','plot'=>'required','year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"), 'producer_id' => 'integer', 'poster' => 'required|image'];
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
-            movies::create($input);
+            $movies = movies::create($input);
+            $movies->addMedia($request['poster'])->toMediaCollection('posters');
             return Redirect::to('/movies')->with('success','New Movie added!');
         }
         return redirect()->back()->withInput()->withErrors($validator);
@@ -77,7 +78,7 @@ class MoviesController extends Controller
      */
     public function show($id)
     {
-        $movies = movies::find($id);
+        $movies = movies::with('media')->find($id);
         //dd($movies);
         return View::make('movies.show',compact('movies'));
     }
@@ -129,7 +130,7 @@ class MoviesController extends Controller
         return Redirect::to('/movies')->with('success','Movie deleted!');
     }
 
-    public function restore($id) 
+    public function restore($id)
     {
         movies::withTrashed()->where('movie_id',$id)->restore();
         return Redirect::route('movies.index')->with('success','Movie restored successfully!');

@@ -7,7 +7,7 @@
     </a>
     @if ($message = Session::get('success'))
         <div class="alert alert-success alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button> 
+                <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $message }}</strong>
         </div>
     @endif
@@ -40,7 +40,7 @@
                 <button><i class="fa fa-undo" aria-hidden="true" style="font-size:24px; color:green" ></i></button></td>
             {!! Form::close() !!}
         </tr>
-        
+
         @endforeach
     </tbody>
 </table>
