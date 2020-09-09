@@ -33,16 +33,23 @@
         <tbody>
 
             @foreach ($actor->movies as $movie)
+
             <tr>
                 <td>{{ $movie->title }} </td>
                 @endforeach
-                @foreach ($actor->roles as $role)
-                <td>{{ $movie->role_name }}</td>
+                @foreach ($actor->movie_actors as $movie_actor)
+                <td>{{ $movie_actor->role}}</td>
             </tr>
             @endforeach
-            @endforeach
+
+
         </tbody>
     </table>
+
+    <div class="logo">
+        <img src="{{ $actor->getFirstMediaUrl('actors') }}" alt="actor-poster" width="150" height="150">
+    </div>
+    @endforeach
 </div>
 </div>
 @endsection

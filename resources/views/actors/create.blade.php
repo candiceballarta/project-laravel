@@ -6,8 +6,15 @@
         <div class="container">
 
             <h2>Create New Actor</h2>
-            <form method="post" action="{{url('actors')}}" >
+            <form method="post" action="{{url('actors')}}" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                <div class="input-group mb-3">
+                    <div class="custom-file">
+                        <input type="file" name="actor" class="custom-file-input" id="inputGroupFile">
+                        <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="fname" class="control-label">First Name</label>

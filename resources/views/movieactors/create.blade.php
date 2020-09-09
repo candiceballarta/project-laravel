@@ -7,14 +7,14 @@
 <div class="container">
 
 <h2>Create Movie Actor</h2>
-<form method="post" action="{{url('movie_actors')}}" >
+<form method="post" action="{{url('movieactors')}}" >
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 <div class="form-group">
-    {{ Form::label('role_name', 'Role Name') }}
-    {{ Form::text('role_name',old('role_name'),array('class'=>'form-control')) }}
-    @if($errors->has('role_name'))
-        <small>{{ $errors->first('role_name') }}</small>
+    {{ Form::label('role', 'Role Name') }}
+    {{ Form::text('role',old('role'),array('class'=>'form-control')) }}
+    @if($errors->has('role'))
+        <small>{{ $errors->first('role') }}</small>
     @endif
 </div>
 
@@ -35,10 +35,10 @@
 </div>
 
 <div class="form-group">
-    <label for="role" class="control-label">Role</label>
+    <label for="role_id" class="control-label">Role</label>
     {!! Form::select('role_id',$roles, null,['class' => 'form-control']) !!}
-    @if($errors->has('role'))
-        <small>{{ $errors->first('role') }}</small>
+    @if($errors->has('role_id'))
+        <small>{{ $errors->first('role_id') }}</small>
     @endif
 </div>
 

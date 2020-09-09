@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class movie_actors extends Model
 {
-    protected $fillable = ['role_name','movie_id','actor_id', 'role_id'];
+
+    public $timestamps = false;
+    protected $fillable = ['role','movie_id','actor_id', 'role_id'];
+
+    public function actors()
+    {
+        return $this->belongsTo('App\actors');
+    }
 }
