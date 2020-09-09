@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\WelcomeMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,15 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/email', function () {
-    Mail::to('head@email.com')->send(new WelcomeMail());
+// Route::get('/email', function () {
+//     Mail::to('head@email.com')->send(new WelcomeMail());
 
-    return new WelcomeMail();
-});
+//     return new WelcomeMail();
+// });
 
 // Route::get('/uwu', function () {
 //     return "Hemlo boi~";
-// });
+// })
+
 
 
 Auth::routes();
@@ -46,3 +46,6 @@ Route::get('/movieactors/create', ['uses' => 'MovieActorController@create', 'as'
 Route::post('/movieactors', ['uses' => 'MovieActorController@store', 'as' => 'movieactors.store']);
 Route::get('/movieactors/edit/{id}', ['uses' => 'MovieActorController@edit', 'as' => 'movieactors.edit']);
 Route::resource('image', 'ImageController');
+Route::get('/admin', ['uses' => 'AdminEmailController@create', 'as' => 'admin.create']);
+Route::post('/admin', ['uses' => 'AdminEmailController@store', 'as' => 'admin.store']);
+Route::get('/dropdown-data', 'AdminEmailController@data');
