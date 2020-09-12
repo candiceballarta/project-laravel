@@ -1,9 +1,8 @@
 @component('mail::message')
 # Hello {{$data['email']}},
 
-{{$data['subject']}}
-
-{{$data['message']}}
+<strong>{{$data['subject']}}</strong><br>
+<small>{{$data['message']}}</small>
 
 Thanks,<br>
 myMovies Team

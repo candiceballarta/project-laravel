@@ -59,24 +59,11 @@ class MoviesController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        $rules = [
-            'title' =>'required|max:45',
-            'plot'=>'required',
-            'year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"),
-            'producer_id' => 'integer', 'poster' => 'required|image'
-            ];
-
+        $rules = ['title' =>'required|max:45','plot'=>'required','year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"), 'producer_id' => 'integer', 'poster' => 'required|image'];
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
-
-            $producer = producers::find($input['producer_id']);
-            $movies = new movies();
-            $movies->title = $input['title'];
-            $movies->plot = $input['plot'];
-            $movies->year = $input['year'];
-            $movies->producers()->associate($producer);
-
+            $movies = movies::create($input);
             $movies->addMedia($request['poster'])->toMediaCollection('posters');
             return Redirect::to('/movies')->with('success','New Movie added!');
         }

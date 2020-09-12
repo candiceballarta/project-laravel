@@ -48,4 +48,3 @@ Route::get('/movieactors/edit/{id}', ['uses' => 'MovieActorController@edit', 'as
 Route::resource('image', 'ImageController');
 Route::get('/admin', ['uses' => 'AdminEmailController@create', 'as' => 'admin.create']);
 Route::post('/admin', ['uses' => 'AdminEmailController@store', 'as' => 'admin.store']);
-Route::get('/dropdown-data', 'AdminEmailController@data');
