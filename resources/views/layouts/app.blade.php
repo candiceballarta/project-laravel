@@ -20,11 +20,36 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <style>
+        html,
+        body {
+            height: 100%;
+            color:white;
+        }
+
+        #page-content {
+            flex: 1 0 auto;
+        }
+
+        #sticky-footer {
+            flex-shrink: none;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Other Classes for Page Styling */
+
+        body {
+            background: #2d3236;
+            text-color:white;
+        }
+    </style>
 
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="text-color: white; background-color: #E6B31E;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -35,15 +60,15 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mx-auto">
-                            <li class="nav-item"><a class="nav-link">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Contact Us</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/movies') }}">Movies</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/actors') }}">Actors</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/producers') }}">Producers</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/genres') }}">Genre</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/roles') }}">Roles</a></li>
-                        </ul>
+                    <ul class="navbar-nav mx-auto font-weight-bold">
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Contact Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/movies') }}">Movies</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/actors') }}">Actors</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/producers') }}">Producers</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/genres') }}">Genre</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/roles') }}">Roles</a></li>
+                    </ul>
 
 
 
@@ -53,41 +78,46 @@
 
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                        @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                    @endguest
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+    <main class="py-4">
+        @yield('content')
+    </main>
+    <footer id="sticky-footer" class="py-4 text-white-50" style="text-weight: bold; text-color: white; background-color: #E6B31E;">
+        <div class="container text-center">
+            <small>Copyright &copy; myMovies</small>
+        </div>
+    </footer>
+</div>
 </body>
 </html>

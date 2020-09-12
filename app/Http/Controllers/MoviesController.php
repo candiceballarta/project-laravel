@@ -31,7 +31,7 @@ class MoviesController extends Controller
     {
         //$movies = DB::table('movies')->leftJoin('producers','movies.producer_id','=','producers.producer_id')->get();
         //$movies = movies::all();
-        $movies = movies::with('producers')->get();
+        $movies = movies::with('producers', 'media')->get();
         //dd($movies);
         // foreach ($movies as $movie) {
         //     dump($movie->producers);
