@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\roles;
+use App\actors;
+use App\movies;
 
 class RolesController extends Controller
 {
@@ -39,7 +41,10 @@ class RolesController extends Controller
      */
     public function create()
     {
-        return View::make('roles.create');
+        $actors = actors::pluck('fname','actor_id');
+        $movies = movies::pluck('title','movie_id');
+
+        return View::make('roles.create', compact('actors', 'movies'));
     }
 
     /**
