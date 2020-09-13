@@ -16,5 +16,4 @@ class actors extends Model
     {
         return $this->hasMany('App\movie_actors','actor_id', 'movie_id');
     }
-
 }

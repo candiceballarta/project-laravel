@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\actors;
 use App\movie_actors;
+use App\movies;
+use App\producers;
 
 class ActorsController extends Controller
 {
