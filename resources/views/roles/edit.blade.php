@@ -11,10 +11,26 @@
             {{-- csrf_field() --}}
             {{-- method_field('PATCH') --}}
 
-            <div class="form-group">
-                <label for="role_name" class="control-label">Roles</label>
-                {{ Form::text('role_name',null,array('class'=>'form-control','roles_id'=>'role_name')) }}
-            </div>
+<div class="form-group">
+    {{ Form::label('movie', 'Movie') }}
+    {!! Form::select('movie_id',$movies, null,['class' => 'form-control']) !!}
+    @if($errors->has('movie'))
+    <small>{{ $errors->first('movie') }}</small>
+    @endif
+</div>
+
+<div class="form-group">
+    {{ Form::label('actor', 'Actor') }}
+    {!! Form::select('actor_id',$actors, null,['class' => 'form-control']) !!}
+    @if($errors->has('actor'))
+    <small>{{ $errors->first('actor') }}</small>
+    @endif
+</div>
+
+<div class="form-group">
+    <label for="role_name" class="control-label">Roles</label>
+    {{ Form::text('role_name',null,array('class'=>'form-control','roles_id'=>'role_name')) }}
+</div>
 
             <input type="hidden"   name="roles_id" value="{{$roles->role_id}}">
             <button type="submit" class="btn btn-primary">Update</button>
