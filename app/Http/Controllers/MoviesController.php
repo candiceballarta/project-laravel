@@ -67,10 +67,27 @@ class MoviesController extends Controller
             'movie_image' => 'image|nullable|max:1999'
         ];
 
+        //File Handle Upload
+        if($request->hasFile('movie_image')){
+            $filenameWithExt = $request->file('movie_image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $request->file('movie_image')->getClientOriginalExtension();
+            $filenameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $request->file('movie_image')->storeAs('public/movie_images', $filenameToStore);
+        } else {
+            $filenameToStore = 'noimage.jpg';
+        }
+
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
-            $movies = movies::create($input);
+            $movies = new movies;
+            $movies->title = $input['title'];
+            $movies->plot = $input['plot'];
+            $movies->year = $input['year'];
+            $movies->producer_id = $input['producer_id'];
+            $movies->movie_image = $filenameToStore;
+            $movies->save();
             return Redirect::to('/movies')->with('success','New Movie added!');
         }
         return redirect()->back()->withInput()->withErrors($validator);
@@ -110,20 +127,36 @@ class MoviesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $rules = [
             'title' =>'required|max:45',
             'plot'=>'required',
             'year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"),
-            'producer_id' => 'integer'
+            'producer_id' => 'integer',
+            'movie_image' => 'image|nullable|max:1999'
         ];
+
+        if($request->hasFile('movie_image')){
+            $filenameWithExt = $request->file('movie_image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $request->file('movie_image')->getClientOriginalExtension();
+            $filenameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $request->file('movie_image')->storeAs('public/movie_images', $filenameToStore);
+        } else {
+            $filenameToStore = 'noimage.jpg';
+        }
 
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
             $movies = movies::find($request->id);
-            $movies->update($input);
+            $movies->title = $input['title'];
+            $movies->plot = $input['plot'];
+            $movies->year = $input['year'];
+            $movies->producer_id = $input['producer_id'];
+            $movies->movie_image = $filenameToStore;
+            $movies->save();
             return Redirect::to('/movies')->with('success','Movie updated!');
         }
         return redirect()->back()->withInput()->withErrors($validator);
