@@ -32,7 +32,7 @@
         </thead>
         <tbody>
 
-            @foreach ($actor->movie_actors() as $movie)
+            @foreach ($actor->movie_actors as $movie)
 
             <tr>
                 <td>{{ $movie->title }} </td>
