@@ -53,7 +53,12 @@ class ActorsController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = ['fname'=>'required|max:16|alpha','lname'=>'required|max:16|alpha','notes'=>'required|max:50'];
+        $rules = [
+            'fname'=>'required|max:16|alpha',
+            'lname'=>'required|max:16|alpha',
+            'notes'=>'required|max:50'
+        ];
+
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
