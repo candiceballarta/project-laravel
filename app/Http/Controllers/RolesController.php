@@ -55,12 +55,21 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = ['role_name'=>'required|max:16|alpha'];
+        $rules = [
+            'role_name'=>'required|max:45'
+        ];
+
         $input = $request->all();
+        $movies = movies::find($input['movie_id']);
+        $actors = actors::find($input['actor_id']);
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
-            roles::create($input);
-            return Redirect::to('/roles')->with('success','New Role added!');
+            $roles = new roles;
+            $roles->role_name = $input['role_name'];
+            $roles->save();
+            $roles->movies()->attach($movies);
+            $roles->actors()->attach($actors);
+            
         }
         return redirect()->back()->withInput()->withErrors($validator);
     }
@@ -103,6 +112,22 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $rules = [
+            'role_name'=>'required|max:45'
+        ];
+
+        $input = $request->all();
+        $movies = movies::find($input['movie_id']);
+        $actors = actors::find($input['actor_id']);
+        $validator = Validator::make($input, $rules);
+        if ($validator->passes()) {
+            $roles = roles::find($id);
+            $roles->role_name = $input['role_name'];
+            $roles->movies()->associate($movies);
+            $roles->actors()->associate($actors);
+            $roles->save();
+        }
+
         $roles = roles::find($request->id);
         $roles->update($request->all());
         return Redirect::to('/roles')->with('success','Role updated!');
