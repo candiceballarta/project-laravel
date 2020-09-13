@@ -67,10 +67,26 @@ class MoviesController extends Controller
             'movie_image' => 'image|nullable|max:1999'
         ];
 
+        if($request->hasFile('movie_image')){
+            $filenameWithExt = $request->file('movie_image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $request->file('movie_image')->getClientOriginalExtension();
+            $filenameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $request->file('movie_image')->storeAs('public/movie_images', $filenameToStore);
+        } else {
+            $filenameToStore = 'noimage.jpg';
+        }
+
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
-            $movies = movies::create($input);
+            $movies = new movies;
+            $movies->title = $input['title'];
+            $movies->plot = $input['plot'];
+            $movies->year = $input['year'];
+            $movies->producer_id = $input['producer_id'];
+            $movies->movie_image = $filenameToStore;
+            $movies->save();
             return Redirect::to('/movies')->with('success','New Movie added!');
         }
         return redirect()->back()->withInput()->withErrors($validator);
