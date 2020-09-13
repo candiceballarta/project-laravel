@@ -4,12 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
-class actors extends Model implements HasMedia
+class actors extends Model
 {
-    use InteractsWithMedia;
 
     protected $fillable = ['fname', 'lname', 'notes'];
     protected $primaryKey = 'actor_id';

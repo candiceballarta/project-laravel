@@ -4,12 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
-class movies extends Model implements HasMedia
+class movies extends Model
 {
-    use InteractsWithMedia;
 
     protected $fillable = ['title','plot','year', 'producer_id'];
     protected $primaryKey = 'movie_id';
@@ -39,21 +36,5 @@ class movies extends Model implements HasMedia
     {
         return $this->belongsToMany('App\genre', 'movie_genre', 'movie_id', 'genre_id');
     }
-
-    protected $appends = [
-        'poster'
-    ];
-
-    public function getProfileAttribute()
-    {
-        $profile = $this->getMedia('posters')->first();
-
-        if($profile){
-            return $profile->getUrl();
-        }
-
-        return null;
-    }
-
 
 }
