@@ -53,12 +53,16 @@ class ActorsController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = ['fname'=>'required|max:16|alpha','lname'=>'required|max:16|alpha','notes'=>'required|max:50'];
+        $rules = [
+            'fname'=>'required|max:16|alpha',
+            'lname'=>'required|max:16|alpha',
+            'notes'=>'required|max:50'
+        ];
+
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
             $actors = actors::create($input);
-            $actors->addMedia($request['actor'])->toMediaCollection('actors');
             return Redirect::to('/actors')->with('success','New Actor added!');
         }
         return redirect()->back()->withInput()->withErrors($validator);
@@ -72,7 +76,7 @@ class ActorsController extends Controller
      */
     public function show($id)
     {
-        $actors = actors::where('actor_id', '=', $id)->with('movies', 'movie_actors','media')->get();
+        $actors = actors::where('actor_id', '=', $id)->with('movies', 'movie_actors')->get();
         //$actors = actors::with('movies')->find($id);
         //dd($actors);
         return View::make('actors.show',compact('actors'));

@@ -31,7 +31,7 @@ class MoviesController extends Controller
     {
         //$movies = DB::table('movies')->leftJoin('producers','movies.producer_id','=','producers.producer_id')->get();
         //$movies = movies::all();
-        $movies = movies::with('producers', 'media')->get();
+        $movies = movies::with('producers')->get();
         //dd($movies);
         // foreach ($movies as $movie) {
         //     dump($movie->producers);
@@ -59,12 +59,18 @@ class MoviesController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        $rules = ['title' =>'required|max:45','plot'=>'required','year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"), 'producer_id' => 'integer', 'poster' => 'required|image'];
+        $rules = [
+            'title' =>'required|max:45',
+            'plot'=>'required',
+            'year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"),
+            'producer_id' => 'integer',
+            'movie_image' => 'image|nullable|max:1999'
+        ];
+
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
             $movies = movies::create($input);
-            $movies->addMedia($request['poster'])->toMediaCollection('posters');
             return Redirect::to('/movies')->with('success','New Movie added!');
         }
         return redirect()->back()->withInput()->withErrors($validator);
@@ -78,7 +84,7 @@ class MoviesController extends Controller
      */
     public function show($id)
     {
-        $movies = movies::with('media')->find($id);
+        $movies = movies::find($id);
         //dd($movies);
         return View::make('movies.show',compact('movies'));
     }
@@ -106,7 +112,13 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = ['title' =>'required|max:45','plot'=>'required','year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"), 'producer_id' => 'integer'];
+        $rules = [
+            'title' =>'required|max:45',
+            'plot'=>'required',
+            'year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"),
+            'producer_id' => 'integer'
+        ];
+
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {

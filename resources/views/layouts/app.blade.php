@@ -33,9 +33,6 @@
 
         #sticky-footer {
             flex-shrink: none;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
         }
 
         /* Other Classes for Page Styling */

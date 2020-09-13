@@ -15,9 +15,8 @@
     <div class="container">
         <div class="row">
             @foreach($movies as $movie)
-            <div class="col-md-4">
-
-                <div class="card mb-4 box-shadow bg-dark" style="width: 18rem;">
+            <div class="col-md-3">
+                <div class="card mb-4 box-shadow bg-dark" style="width: 220px;">
                     <a href="{{route('movies.show',$movie->movie_id)}}">
                         <img class="card-img-top" src="{{ $movie->getFirstMediaUrl('posters') }}" alt="movie-poster" width="70" height="250"></a>
                         <div class="card-body">
