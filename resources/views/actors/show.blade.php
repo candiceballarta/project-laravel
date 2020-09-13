@@ -36,9 +36,7 @@
 
             <tr>
                 <td>{{ $movie->title }} </td>
-                @endforeach
-                @foreach ($actor->movie_actors as $movie_actor)
-                <td>{{ $movie_actor->role}}</td>
+                <td>{{ $movie->role}}</td>
             </tr>
             @endforeach
 

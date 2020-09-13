@@ -23,6 +23,7 @@
         <img src="/storage/movie_images/{{ $movies->movie_image }}" alt="movie-poster" width="150" height="150">
     </div>
 
+
     <div class="container">
         <a href="{{route('movieactors.create')}}" class="btn btn-primary a-btn-slide-text">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>

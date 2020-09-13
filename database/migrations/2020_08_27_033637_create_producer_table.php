@@ -48,6 +48,7 @@ class CreateProducerTable extends Migration
         });
 
         Schema::create('movie_actors', function (Blueprint $table) {
+            $table->string('role',45);
             $table->bigInteger('movie_id')->unsigned();
             $table->foreign('movie_id')->references('movie_id')->on('movies')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('actor_id')->unsigned();
