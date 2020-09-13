@@ -21,7 +21,7 @@ class RolesController extends Controller
     {
         $this->middleware('auth', ['except' => ['index','show']]);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -41,10 +41,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        $actors = actors::pluck('fname','actor_id');
-        $movies = movies::pluck('title','movie_id');
-
-        return View::make('roles.create', compact('actors', 'movies'));
+        return View::make('roles.create');
     }
 
     /**
@@ -60,18 +57,15 @@ class RolesController extends Controller
         ];
 
         $input = $request->all();
-        $movies = movies::find($input['movie_id']);
-        $actors = actors::find($input['actor_id']);
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
             $roles = new roles;
             $roles->role_name = $input['role_name'];
             $roles->save();
-            $roles->movies()->attach($movies);
-            $roles->actors()->attach($actors);
-            
+            return Redirect::to('/roles')->with('success','Role created!');
         }
         return redirect()->back()->withInput()->withErrors($validator);
+
     }
 
     /**
@@ -95,9 +89,6 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        $actors = actors::pluck('fname','actor_id');
-        $movies = movies::pluck('title','movie_id');
-
         $roles = roles::find($id);
         //dd($roles);
         return View::make('roles.edit',compact('roles'));
@@ -117,19 +108,13 @@ class RolesController extends Controller
         ];
 
         $input = $request->all();
-        $movies = movies::find($input['movie_id']);
-        $actors = actors::find($input['actor_id']);
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
             $roles = roles::find($id);
             $roles->role_name = $input['role_name'];
-            $roles->movies()->associate($movies);
-            $roles->actors()->associate($actors);
             $roles->save();
-        }
 
-        $roles = roles::find($request->id);
-        $roles->update($request->all());
+        }
         return Redirect::to('/roles')->with('success','Role updated!');
     }
 

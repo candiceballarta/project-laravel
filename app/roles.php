@@ -11,11 +11,6 @@ class roles extends Model
 
     public function movies()
     {
-        return $this->belongsToMany('App\movies', 'movie_actors', 'role_id', 'movie_id');
-    }
-
-    public function actors()
-    {
-        return $this->belongsToMany('App\actors', 'movie_actors', 'role_id', 'actor_id');
+        return $this->hasMany('App\movie_actors', 'role_id');
     }
 }

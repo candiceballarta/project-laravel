@@ -29,11 +29,17 @@ class MovieActorController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        $rules = ['role'=>'required|max:16|alpha_dash'];
+        $rules = [
+            'role'=>'required|max:16|alpha_dash'
+        ];
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
-            movie_actors::create($input);
+            $movie_actor = new movie_actors;
+            $movie_actor->role_id = $input['role'];
+            $movie_actor->roles()->associate($roles);
+            $movie_actor->movies()->associate($movies);
+            $movie_actor->actors()->associate($actors);
             return Redirect::to('/movies')->with('success','New Actor Role added!');
         }
         return redirect()->back()->withInput()->withErrors($validator);
