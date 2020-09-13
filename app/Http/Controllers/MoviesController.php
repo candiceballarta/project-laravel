@@ -59,12 +59,18 @@ class MoviesController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        $rules = ['title' =>'required|max:45','plot'=>'required','year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"), 'producer_id' => 'integer'];
+        $rules = [
+            'title' =>'required|max:45',
+            'plot'=>'required',
+            'year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"),
+            'producer_id' => 'integer',
+            'movie_image' => 'image|nullable|max:1999'
+        ];
+
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
             $movies = movies::create($input);
-
             return Redirect::to('/movies')->with('success','New Movie added!');
         }
         return redirect()->back()->withInput()->withErrors($validator);
@@ -106,7 +112,13 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = ['title' =>'required|max:45','plot'=>'required','year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"), 'producer_id' => 'integer'];
+        $rules = [
+            'title' =>'required|max:45',
+            'plot'=>'required',
+            'year' => 'integer|min:' . (date("Y") - 100) . '|max:' . date("Y"),
+            'producer_id' => 'integer'
+        ];
+
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
