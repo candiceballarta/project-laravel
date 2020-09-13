@@ -10,6 +10,13 @@
             {{-- csrf_field() --}}
             {{-- method_field('PATCH') --}}
 
+            <div class="input-group mb-3">
+                    <div class="custom-file">
+                        <input type="file" name="actor_image" class="custom-file-input" id="inputGroupFile">
+                        <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                    </div>
+            </div>
+
             <div class="form-group">
                 <label for="fname" class="control-label">First Name</label>
                 {{ Form::text('fname',null,array('class'=>'form-control','actor_id'=>'fname')) }}
