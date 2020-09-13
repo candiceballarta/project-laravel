@@ -29,7 +29,13 @@ class AddPostersColumns extends Migration
      */
     public function down()
     {
-        Schema::dropColumn('movie_image');
-        Schema::dropColumn('actor_image');
+        Schema::table('actors', function (Blueprint $table){
+            $table->dropColumn('actor_image');
+        });
+
+        Schema::table('movies', function (Blueprint $table){
+            $table->dropColumn('movie_image');
+        });
+
     }
 }

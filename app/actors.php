@@ -22,8 +22,4 @@ class actors extends Model
         return $this->belongsToMany('App\roles', 'movie_actors', 'actor_id', 'role_id');
     }
 
-    public function movie_actors()
-    {
-        return $this->hasMany('App\movie_actors', 'actor_id');
-    }
 }
