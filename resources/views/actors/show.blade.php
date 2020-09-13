@@ -39,14 +39,13 @@
         </thead>
         <tbody>
 
-            @foreach ($actor->movie_actors() as $movie)
+            @foreach ($actor->movies as $movie)
 
             <tr>
-                <td>{{ $movie->movie_image }}</td>
-                <td>{{ $movie->title }} </td>
-                <td>{{ $movie->year }}</td>
-                <td>{{ $movie->role_name}}</td>
-                <td>test</td>
+                    <td>{{ $movie->title }} </td>
+                @endforeach
+                @foreach ($actor->roles as $role)
+                    <td>{{ $role->role_name}}</td>
             </tr>
             @endforeach
 

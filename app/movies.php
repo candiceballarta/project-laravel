@@ -14,7 +14,7 @@ class movies extends Model
 
     public function actors()
     {
-        return $this->hasMany('App\movie_actors', 'movie_id', 'actor_id');
+        return $this->hasMany('App\movie_actors', 'movie_id');
     }
 
     public function producers()
