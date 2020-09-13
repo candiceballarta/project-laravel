@@ -66,10 +66,10 @@ class RolesController extends Controller
         if ($validator->passes()) {
             $roles = new roles;
             $roles->role_name = $input['role_name'];
-            $roles->save();
-            $roles->movies()->attach($movies);
-            $roles->actors()->attach($actors);
-            
+            $roles->actors()->associate($actors);
+            $roles->movies()->associate($movies);
+            $roles->save();$roles->save();
+            return Redirect::to('/roles')->with('success','New Role added!');
         }
         return redirect()->back()->withInput()->withErrors($validator);
     }
