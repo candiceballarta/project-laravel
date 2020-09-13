@@ -47,7 +47,7 @@
     </table>
 
     <div class="logo">
-        <img src="{{ $actor->getFirstMediaUrl('actors') }}" alt="actor-poster" width="150" height="150">
+        <img src="/storage/actor_images/{{ $actor->actor_image }}" alt="actor-poster" width="150" height="150">
     </div>
     @endforeach
 </div>

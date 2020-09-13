@@ -7,7 +7,7 @@
         <div class="container">
 
             <h2>Create New Movie</h2>
-            {!! Form::model($movies,['method'=>'PATCH','route' => ['movies.update',$movies->movie_id]]) !!}
+            {!! Form::model($movies,['method'=>'PATCH','route' => ['movies.update',$movies->movie_id], 'enctype' => 'multipart/form-data']) !!}
             {{-- {{ csrf_field() }}
             {{ method_field('PATCH') }} --}}
 
@@ -16,6 +16,9 @@
                     <input type="file" name="movie_image" class="custom-file-input" id="inputGroupFile">
                     <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
                 </div>
+                @if($errors->has('movie_image'))
+                <small>{{ $errors->first('movie_image') }}</small>
+                @endif
             </div>
 
             <div class="form-group">
