@@ -101,7 +101,7 @@ class MoviesController extends Controller
      */
     public function show($id)
     {
-        $movies = movies::find($id);
+        $movies = movies::where('movie_id', '=', $id)->with('producers')->get();
         //dd($movies);
         return View::make('movies.show',compact('movies'));
     }
