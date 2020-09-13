@@ -16,6 +16,9 @@
                     <input type="file" name="movie_image" class="custom-file-input" id="inputGroupFile">
                     <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
                 </div>
+                @if($errors->has('movie_image'))
+                <small>{{ $errors->first('movie_image') }}</small>
+                @endif
             </div>
 
             <div class="form-group">

@@ -20,7 +20,7 @@
     </table>
 
     <div class="logo">
-        <img src="{{ $movies->getFirstMediaUrl('posters') }}" alt="movie-poster" width="150" height="150">
+        <img src="/storage/movie_images/{{ $movies->movie_image }}" alt="movie-poster" width="150" height="150">
     </div>
 
     <div class="container">

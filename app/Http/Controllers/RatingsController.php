@@ -19,7 +19,7 @@ class RatingsController extends Controller
     {
         $this->middleware('auth', ['except' => ['index','show']]);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -50,7 +50,11 @@ class RatingsController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = ['score'=>'required','comment'=>'required|profanity|max:350|alpha_num'];
+        $rules = [
+            'score'=>'required',
+            'comment'=>'required|profanity|max:350'
+        ];
+
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
