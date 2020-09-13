@@ -93,7 +93,7 @@ class ActorsController extends Controller
      */
     public function show($id)
     {
-        $actors = actors::where('actor_id', '=', $id)->with('movie')->get();
+        $actors = actors::where('actor_id', '=', $id)->with('movie_actors')->get();
         //$actors = actors::with('movies')->find($id);
         //dd($actors);
         return View::make('actors.show',compact('actors'));

@@ -12,9 +12,9 @@ class actors extends Model
     protected $primaryKey = 'actor_id';
     use SoftDeletes;
 
-    public function movies()
+    public function movie_actors()
     {
-        return $this->hasMany('App\movie_actors','actor_id');
+        return $this->hasMany('App\movie_actors','actor_id', 'movie_id');
     }
 
 }

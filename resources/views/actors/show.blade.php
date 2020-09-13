@@ -3,7 +3,7 @@
 {{-- <h1>{{$actors->fname}}</h1>
 <h1>{{$actors->lname}}</h1> --}}
 <div class="table-responsive">
-    <table class="table table-striped table-hover">
+    <table class="table table-striped table-hover text-white">
         <thead>
             <tr>
                 <th>Actor ID</th>
@@ -23,7 +23,7 @@
         </tbody>
     </table>
 
-    <table class="table table-striped table-hover">
+    <table class="table table-striped table-hover text-white">
         <thead>
             <tr>
                 <th>Movie Name</th>
@@ -32,11 +32,12 @@
         </thead>
         <tbody>
 
-            @foreach ($actor->movies as $movie)
+            @foreach ($actor->movie_actors() as $movie)
 
             <tr>
                 <td>{{ $movie->title }} </td>
-                <td>{{ $movie->role}}</td>
+                <td>{{ $movie->role_id}}</td>
+                <td>test</td>
             </tr>
             @endforeach
 
@@ -44,6 +45,9 @@
         </tbody>
     </table>
 
+    {{-- <div class="card text-white">
+        {{ dd($actor->movie_actors()) }}
+    </div> --}}
     <div class="logo">
         <img src="/storage/actor_images/{{ $actor->actor_image }}" alt="actor-poster" width="150" height="150">
     </div>
