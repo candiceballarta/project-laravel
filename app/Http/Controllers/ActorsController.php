@@ -79,8 +79,6 @@ class ActorsController extends Controller
             $actors->notes = $input['notes'];
             $actors->actor_image = $filenameToStore;
             $actors->save();
-
-            $actors = actors::create($input);
             return Redirect::to('/actors')->with('success','New Actor added!');
         }
 
