@@ -26,9 +26,15 @@
         <tr>
             <td>{{$role->role_id}}</td>
             <td><a href="{{route('roles.show',$role->role_id)}}">{{$role->role_name}}</a></td>
-            <td><a href="{{ route('roles.edit',$role->role_id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px" ></a></i></td>
-            <td>{!! Form::open(array('route' => array('roles.destroy',$role->role_id),'method'=>'DELETE')) !!}
-            <button ><i class="fa fa-trash-o" style="font-size:24px; color:red" ></i></button>
+
+            <td>{!! Form::open(array('route' => array('roles.edit', $role->role_id),'method' => 'GET')) !!}
+                <button><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px; color:yellow" ></i></button></td>
+                {!! Form::close() !!}
+
+            <td>{!! Form::open(array('route' => array('roles.destroy', $role->role_id),'method'=>'DELETE')) !!}
+                <button ><i class="fa fa-trash-o" aria-hidden="true" style="font-size:24px; color:red" ></i></button></td>
+                {!! Form::close() !!}
+                
         @endforeach
     </tbody>
 </table>
