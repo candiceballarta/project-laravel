@@ -15,7 +15,7 @@
     {{ Form::label('movie', 'Movie') }}
     {!! Form::select('movie_id',$movies, null,['class' => 'form-control']) !!}
     @if($errors->has('movie'))
-    <small>{{ $errors->first('movie') }}</small>
+        <small>{{ $errors->first('movie') }}</small>
     @endif
 </div>
 
@@ -23,7 +23,7 @@
     {{ Form::label('actor', 'Actor') }}
     {!! Form::select('actor_id',$actors, null,['class' => 'form-control']) !!}
     @if($errors->has('actor'))
-    <small>{{ $errors->first('actor') }}</small>
+        <small>{{ $errors->first('actor') }}</small>
     @endif
 </div>
 

@@ -86,6 +86,9 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
+        $actors = actors::pluck('fname','actor_id');
+        $movies = movies::pluck('title','movie_id');
+
         $roles = roles::find($id);
         //dd($roles);
         return View::make('roles.edit',compact('roles'));
