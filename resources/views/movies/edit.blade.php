@@ -13,7 +13,7 @@
 
             <div class="input-group mb-3">
                 <div class="custom-file">
-                    <input type="file" name="poster" class="custom-file-input" id="inputGroupFile">
+                    <input type="file" name="movie_image" class="custom-file-input" id="inputGroupFile">
                     <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
                 </div>
             </div>
