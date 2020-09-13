@@ -45,6 +45,5 @@ Route::post('/contact', 'ContactFormController@store');
 Route::get('/movieactors/create', ['uses' => 'MovieActorController@create', 'as' => 'movieactors.create']);
 Route::post('/movieactors', ['uses' => 'MovieActorController@store', 'as' => 'movieactors.store']);
 Route::get('/movieactors/edit/{id}', ['uses' => 'MovieActorController@edit', 'as' => 'movieactors.edit']);
-Route::resource('image', 'ImageController');
 Route::get('/admin', ['uses' => 'AdminEmailController@create', 'as' => 'admin.create']);
 Route::post('/admin', ['uses' => 'AdminEmailController@store', 'as' => 'admin.store']);
