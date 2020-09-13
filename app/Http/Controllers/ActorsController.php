@@ -109,38 +109,6 @@ class ActorsController extends Controller
     {
         $actors = actors::find($id);
         //dd($actors);
-
-        $rules = [
-            'fname'=>'required|max:16|alpha',
-            'lname'=>'required|max:16|alpha',
-            'notes'=>'required|max:50',
-            'actor_image' => 'image|nullable|max:1999'
-        ];
-
-        if($request->hasFile('actor_image')){
-            $filenameWithExt = $request->file('actor_image')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $ext = $request->file('actor_image')->getClientOriginalExtension();
-            $filenameToStore = $filename.'_'.time().'.'.$ext;
-            $path = $request->file('actor_image')->storeAs('public/actor_images', $filenameToStore);
-        } else {
-            $filenameToStore = 'noimage.jpg';
-        }
-
-        $input = $request->all();
-        $validator = Validator::make($input, $rules);
-        if ($validator->passes()) {
-            $actors = new actors;
-            $actors->fname = $input['fname'];
-            $actors->lname = $input['lname'];
-            $actors->notes = $input['notes'];
-            $actors->actor_image = $filenameToStore;
-            $actors->save();
-
-            $actors = actors::create($input);
-            return Redirect::to('/actors')->with('success','New Actor added!');
-        }
-
         return View::make('actors.edit',compact('actors'));
     }
 
@@ -173,14 +141,12 @@ class ActorsController extends Controller
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
-            $actors = new actors;
+            $actors = actors::find($id);
             $actors->fname = $input['fname'];
             $actors->lname = $input['lname'];
             $actors->notes = $input['notes'];
             $actors->actor_image = $filenameToStore;
             $actors->save();
-
-            $actors = actors::create($input);
             return Redirect::to('/actors')->with('success','New Actor added!');
         }
 
