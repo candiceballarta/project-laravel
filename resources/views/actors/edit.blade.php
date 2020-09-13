@@ -6,7 +6,7 @@
         <div class="container">
 
             <h2>Edit Actor</h2>
-            {!! Form::model($actors,['method'=>'PATCH','route' => ['actors.update',$actors->actor_id]]) !!}
+            {!! Form::model($actors,['method'=>'PATCH','route' => ['actors.update',$actors->actor_id], 'enctype' => 'multipart/form-data']) !!}
             {{-- csrf_field() --}}
             {{-- method_field('PATCH') --}}
 
