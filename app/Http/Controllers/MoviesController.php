@@ -64,7 +64,7 @@ class MoviesController extends Controller
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
             $movies = movies::create($input);
-            $movies->addMedia($request['poster'])->toMediaCollection('posters');
+
             return Redirect::to('/movies')->with('success','New Movie added!');
         }
         return redirect()->back()->withInput()->withErrors($validator);
