@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class movie_actors extends Model
 {
+    public $timestamps = false;
+
     public function roles()
     {
         return $this->belongsTo('App\roles', 'role_id');

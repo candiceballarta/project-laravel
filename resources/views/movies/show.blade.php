@@ -24,6 +24,10 @@
     </div>
 
     <div class="container">
+        {{ $movies->actors() }}
+    </div>
+
+    <div class="container">
         <a href="{{route('movieactors.create')}}" class="btn btn-primary a-btn-slide-text">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             <span><strong>ADD</strong></span>
