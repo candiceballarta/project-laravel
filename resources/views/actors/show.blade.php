@@ -40,12 +40,20 @@
         <tbody>
 
             @foreach ($actor->movies as $movie)
-
             <tr>
-                    <td>{{ $movie->title }} </td>
-                @endforeach
-                @foreach ($actor->roles as $role)
-                    <td>{{ $role->role_name}}</td>
+                <td>{{ $movie->movie_image }} </td>
+            @endforeach
+            
+            @foreach ($actor->movies as $movie)
+                <td>{{ $movie->title }} </td>
+            @endforeach
+
+            @foreach ($actor->movies as $movie)
+                <td>{{ $movie->year }} </td>
+            @endforeach
+
+            @foreach ($actor->roles as $role)
+                <td>{{ $role->role_name}}</td>
             </tr>
             @endforeach
 
