@@ -101,12 +101,16 @@ class MoviesController extends Controller
      */
     public function show($id)
     {
-        $movies = movies::where('movie_id', '=', $id)->with('producers')->get();
-        //dd($movies);
+        $movies = movies::with('producers', 'ratings')
+        ->join('ratings', 'users.id', '=', 'ratings.user_id')
+        ->where('movie_id', '=', $id)
+        ->get();
+        dd($movies);
         return View::make('movies.show',compact('movies'));
     }
 
     /**
+     *
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

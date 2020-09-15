@@ -82,17 +82,21 @@
         </div>
 
 
-        <div class="card mb-3 bg-dark" style="max-width: 23rem;">
+        <div class="card mb-3 bg-dark" style="width: 23rem;">
             <div class="card-header bg-warning text-black-50">
                 Cast
                 <a href="{{route('movieactors.create')}}" class="btn btn-danger a-btn-slide-text mx-auto">
                     <i class="fas fa-plus"></i>
                 </a>
             </div>
-            <div class="card-body">
-                <h5 class="card-title">Light card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
+            <ul class="list-group list-group-flush bg-dark">
+                <li class="list-group-item bg-dark">
+                    <div class="row inline-block">
+                        <img class="col-md-4" src="/storage/movie_images/{{ $movie->movie_image }}" alt="movie-poster" width="80" height="100">
+                        <h5 class="mt-4">Chadwick Boseman</h5>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
