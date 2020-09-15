@@ -21,5 +21,4 @@ class actors extends Model
     {
         return $this->belongsToMany('App\roles', 'movie_actors', 'actor_id' , 'role_id');
     }
-
 }

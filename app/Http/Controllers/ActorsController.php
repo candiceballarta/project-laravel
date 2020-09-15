@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\actors;
 use App\movie_actors;
+use App\movies;
+use App\producers;
 
 class ActorsController extends Controller
 {
@@ -32,7 +34,6 @@ class ActorsController extends Controller
         $actors = actors::all();
         // dd($actors);
         return View::make('actors.index',compact('actors'));
-
     }
 
     /**
@@ -93,9 +94,9 @@ class ActorsController extends Controller
      */
     public function show($id)
     {
-        $actors = actors::where('actor_id', '=', $id)->with('movie_actors')->get();
+        $actors = actors::where('actor_id', '=', $id)->with('movies')->get();
         //$actors = actors::with('movies')->find($id);
-        dd($actors);
+        // dd($actors);
         return View::make('actors.show',compact('actors'));
     }
 
