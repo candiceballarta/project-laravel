@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use App\movies;
-use App\producers;
+use App\Movies;
+use App\Producers;
+use App\Ratings;
 
 class MoviesController extends Controller
 {
@@ -31,7 +32,7 @@ class MoviesController extends Controller
     {
         //$movies = DB::table('movies')->leftJoin('producers','movies.producer_id','=','producers.producer_id')->get();
         //$movies = movies::all();
-        $movies = movies::with('producers')->get();
+        $movies = Movies::with('producers')->get();
         //dd($movies);
         // foreach ($movies as $movie) {
         //     dump($movie->producers);
@@ -46,7 +47,7 @@ class MoviesController extends Controller
      */
     public function create()
     {
-        $producers = producers::pluck('fname','producer_id');
+        $producers = Producers::pluck('fname','producer_id');
         return View::make('movies.create',compact('producers'));
     }
 
@@ -81,7 +82,7 @@ class MoviesController extends Controller
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
-            $movies = new movies;
+            $movies = new Movies;
             $movies->title = $input['title'];
             $movies->plot = $input['plot'];
             $movies->year = $input['year'];
@@ -101,11 +102,15 @@ class MoviesController extends Controller
      */
     public function show($id)
     {
-        $movies = movies::with('producers', 'ratings')
-        ->join('ratings', 'users.id', '=', 'ratings.user_id')
+        $movies = Movies::with('producers', 'actors')
+        ->where('movies.movie_id', '=', $id)
+        ->get();
+
+        $rate = Ratings::with('users')
         ->where('movie_id', '=', $id)
         ->get();
-        dd($movies);
+
+        //dd($movies);
         return View::make('movies.show',compact('movies'));
     }
 
@@ -118,8 +123,8 @@ class MoviesController extends Controller
      */
     public function edit($id)
     {
-        $movies = movies::find($id);
-        $producers = producers::pluck('fname','producer_id');
+        $movies = Movies::find($id);
+        $producers = Producers::pluck('fname','producer_id');
         //dd($movies);
         return View::make('movies.edit',compact('movies','producers'));
     }
@@ -151,7 +156,7 @@ class MoviesController extends Controller
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
-            $movies = movies::find($id);
+            $movies = Movies::find($id);
             $movies->title = $input['title'];
             $movies->plot = $input['plot'];
             $movies->year = $input['year'];
@@ -174,14 +179,14 @@ class MoviesController extends Controller
      */
     public function destroy($id)
     {
-        $movies = movies::findOrFail($id);
+        $movies = Movies::findOrFail($id);
         $movies->delete();
         return Redirect::to('/movies')->with('success','Movie deleted!');
     }
 
     public function restore($id)
     {
-        movies::withTrashed()->where('movie_id',$id)->restore();
+        Movies::withTrashed()->where('movie_id',$id)->restore();
         return Redirect::route('movies.index')->with('success','Movie restored successfully!');
     }
 }

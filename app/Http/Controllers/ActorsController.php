@@ -6,10 +6,9 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\actors;
-use App\movie_actors;
-use App\movies;
-use App\producers;
+use App\Actors;
+use App\Movies;
+use App\Producers;
 
 class ActorsController extends Controller
 {
@@ -31,7 +30,7 @@ class ActorsController extends Controller
      */
     public function index()
     {
-        $actors = actors::all();
+        $actors = Actors::all();
         // dd($actors);
         return View::make('actors.index',compact('actors'));
     }
@@ -74,7 +73,7 @@ class ActorsController extends Controller
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
-            $actors = new actors;
+            $actors = new Actors;
             $actors->fname = $input['fname'];
             $actors->lname = $input['lname'];
             $actors->notes = $input['notes'];
@@ -94,7 +93,7 @@ class ActorsController extends Controller
      */
     public function show($id)
     {
-        $actors = actors::where('actor_id', '=', $id)->with('movies')->get();
+        $actors = Actors::where('actor_id', '=', $id)->with('movies')->get();
         //$actors = actors::with('movies')->find($id);
         // dd($actors);
         return View::make('actors.show',compact('actors'));
@@ -108,7 +107,7 @@ class ActorsController extends Controller
      */
     public function edit($id)
     {
-        $actors = actors::find($id);
+        $actors = Actors::find($id);
         //dd($actors);
         return View::make('actors.edit',compact('actors'));
     }
@@ -142,7 +141,7 @@ class ActorsController extends Controller
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
-            $actors = actors::find($id);
+            $actors = Actors::find($id);
             $actors->fname = $input['fname'];
             $actors->lname = $input['lname'];
             $actors->notes = $input['notes'];
@@ -151,8 +150,6 @@ class ActorsController extends Controller
             return Redirect::to('/actors')->with('success','New Actor added!');
         }
 
-        $actors = actors::find($request->id);
-        $actors->update($request->all());
         return Redirect::to('/actors')->with('success','Actor updated!');
     }
 
@@ -164,14 +161,14 @@ class ActorsController extends Controller
      */
     public function destroy($id)
     {
-        $actors = actors::find($id);
+        $actors = Actors::find($id);
         $actors->delete();
         return Redirect::to('/actors')->with('success','Actor deleted!');
     }
 
     public function restore($id)
     {
-        actors::withTrashed()->where('actor_id',$id)->restore();
+        Actors::withTrashed()->where('actor_id',$id)->restore();
         return Redirect::route('actors.index')->with('success','Actors restored successfully!');
     }
 }
