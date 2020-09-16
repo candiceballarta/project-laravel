@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class producers extends Model
+class Producers extends Model
 {
     protected $fillable = ['fname', 'lname', 'company'];
     protected $primaryKey = 'producer_id';

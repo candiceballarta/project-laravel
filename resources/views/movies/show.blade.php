@@ -13,7 +13,7 @@
                 <small>{{ $movie->year }}</small>
             </div>
             <div class="rating">
-                <h1><span class="badge badge-warning">4/5</span></h1>
+                <h1><span class="badge badge-warning">{{ $avg.'/5' }}</span></h1>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                 @else
                     @foreach ($movie->ratings as $rating)
                         <div class="card-body">
-                            <h5 class="card-title">{{ $rating->user_id }}<span class="badge badge-warning">4/5</span></h5>
+                            <h5 class="card-title">{{ $movie->name }}<span class="badge badge-warning">{{ $rating->score.'/5' }}</span></h5>
                             <p class="card-text">{{ $rating->comment }}</p>
                         </div>
                     @endforeach
@@ -50,6 +50,8 @@
                     {{-- {!! Form::model($ratings ?? ['method'=>'PATCH','route' => ['ratings.create'], 'class'=>'form-row align-items-center']) !!} --}}
                     <form method="post" action="{{url('ratings')}}" class="form-row align-items-center">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="movie_id" value="{{ $movie->movie_id }}">
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 
                         <div class="form-group col-md-7">
                             {!! Form::label('comment', 'Comment') !!}
@@ -61,8 +63,8 @@
                         <div class="form-group col-md-3">
                             {{-- {!! Form::label('score', 'Rating', array('class'=>'form-control')) !!}
                             {!! Form::select('score', $ratings, null,['class' => 'form-control']) !!} --}}
-                            <label for="inputState">Rating</label>
-                            <select id="inputState" class="form-control">
+                            <label for="score">Rating</label>
+                            <select id="score" name="score" class="form-control">
                                 <option selected>Choose...</option>
                                 <option>1</option>
                                 <option>2</option>
@@ -82,17 +84,23 @@
         </div>
 
 
-        <div class="card mb-3 bg-dark" style="max-width: 23rem;">
+        <div class="card mb-3 bg-dark" style="width: 23rem;">
             <div class="card-header bg-warning text-black-50">
                 Cast
                 <a href="{{route('movieactors.create')}}" class="btn btn-danger a-btn-slide-text mx-auto">
                     <i class="fas fa-plus"></i>
                 </a>
             </div>
-            <div class="card-body">
-                <h5 class="card-title">Light card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
+            <ul class="list-group list-group-flush bg-dark">
+                <li class="list-group-item bg-dark">
+                    @foreach ($movie->actors as $actor)
+                        <div class="row inline-block">
+                            <img class="col-md-4" src="/storage/actor_images/{{ $actor->actor_image }}" alt="actor-poster" width="80" height="100">
+                            <h5 class="mt-4">{{ $actor->fname.' '.$actor->lname }}</h5>
+                        </div>
+                    @endforeach
+                </li>
+            </ul>
         </div>
     </div>
 </div>

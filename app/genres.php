@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class genres extends Model
+class Genres extends Model
 {
     protected $fillable = ['genre_name'];
     protected $primaryKey = 'genre_id';

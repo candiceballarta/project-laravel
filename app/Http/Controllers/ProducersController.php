@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\producers;
-use App\movies;
+use App\Producers;
+use App\Movies;
 
 class ProducersController extends Controller
 {
@@ -21,7 +21,7 @@ class ProducersController extends Controller
     {
         $this->middleware('auth', ['except' => ['index','show']]);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +29,7 @@ class ProducersController extends Controller
      */
     public function index()
     {
-        $producers = producers::all();
+        $producers = Producers::all();
         //dd($producers);
         return View::make('producers.index',compact('producers'));
     }
@@ -56,7 +56,7 @@ class ProducersController extends Controller
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
-            producers::create($input);
+            Producers::create($input);
             return Redirect::to('/producers')->with('success','New Producer added!');
         }
         return redirect()->back()->withInput()->withErrors($validator);
@@ -70,7 +70,7 @@ class ProducersController extends Controller
      */
     public function show($id)
     {
-        $producers = producers::find($id);
+        $producers = Producers::find($id);
         //dd($producers);
         return View::make('producers.show',compact('producers'));
     }
@@ -83,7 +83,7 @@ class ProducersController extends Controller
      */
     public function edit($id)
     {
-        $producers = producers::find($id);
+        $producers = Producers::find($id);
         //dd($actors);
         return View::make('producers.edit',compact('producers'));
     }
@@ -101,7 +101,7 @@ class ProducersController extends Controller
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
-            $actors->update($request->all());
+            $producers->update($input);
             return Redirect::to('/producers')->with('success','New Producer updated!');
         }
         return redirect()->back()->withInput()->withErrors($validator);
@@ -115,7 +115,7 @@ class ProducersController extends Controller
      */
     public function destroy($id)
     {
-        $producers = producers::find($id);
+        $producers = Producers::find($id);
         $producers->delete();
         return Redirect::to('/producers')->with('success','Producer deleted!');
     }

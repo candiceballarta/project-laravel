@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class movies extends Model
+class Movies extends Model
 {
 
     protected $fillable = ['title','plot','year', 'producer_id'];

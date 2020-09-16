@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ratings extends Model
+class Ratings extends Model
 {
     protected $fillable = ['score', 'comment'];
     protected $primaryKey = 'rating_id';
