@@ -1,71 +1,47 @@
 @extends('layouts.app')
 @section('content')
-{{-- <h1>{{$actors->fname}}</h1>
-<h1>{{$actors->lname}}</h1> --}}
-<div class="table-responsive">
-    <table class="table table-striped table-hover text-white">
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Notes</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($actors as $actor)
-            <tr>
-                <td>{{$actor->actor_image}}</td>
-                {{-- <td>{{$actor->actor_id}}</td> --}}
-                <td>{{$actor->fname}}</td>
-                <td>{{$actor->lname}}</td>
-                <td>{{$actor->notes}}</td>
-            </tr>
-        </tbody>
-    </table>
+@include('actors/style')
+@foreach($actors as $actor)
 
-    <div class="logo">
-        <img src="/storage/actor_images/{{ $actor->actor_image }}" alt="actor-poster" width="150" height="150">
+<div class="bg-container">
+    <div class="container">
+        <div class="bg-warning" style="height: 200px;">
+        </div>
+        <div class="card mb-3 bg-dark" style="width: 200;">
+            <div class="text-center py-5">
+                <img src="/storage/actor_images/{{ $actor->actor_image }}" class="avatar img-lg rounded-circle mb-4" width="200" height="200">
+                <div class="col-md-8 col-lg-6 col-xl-5 p-0 mx-auto">
+                    <h2 class="font-weight-bold my-4 text-white">{{ $actor->fname." ".$actor->lname }}</h2>
+                    <div class="text-muted mb-4">
+                        <h4>{{'"'.$actor->notes.'"' }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="card-deck col-md-3">
+                        <div class="card mb-4 box-shadow bg-secondary" style="width: 220px;">
+                            @foreach ($actor->movies as $movie)
+                                <img class="card-img-top" src="/storage/movie_images/{{ $movie->movie_image }}" alt="movie-poster" width="70" height="250"></a>
+                            @endforeach
+                            <div class="card-body">
+                                @foreach ($actor->movies as $movie)
+                                    <h5 class="card-title font-weight-bold" style="color: #FF2340">{{$movie->title}}</h5> 
+                                @endforeach
+                                @foreach ($actor->roles as $role)
+                                    <p class="card-text">{{ $role->role_name}}</p>
+                                @endforeach
+                                @foreach ($actor->movies as $movie)
+                                    <small>{{$movie->year}}</small><br>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+@endforeach        
     </div>
-
-    <table class="table table-striped table-hover text-white">
-        <thead>
-            <tr>
-                <th>Poster</th> 
-                <th>Movie Title</th>
-                <th>Year</th>
-                <th>Role</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach ($actor->movies as $movie)
-            <tr>
-                <td>{{ $movie->movie_image }} </td>
-            @endforeach
-            
-            @foreach ($actor->movies as $movie)
-                <td>{{ $movie->title }} </td>
-            @endforeach
-
-            @foreach ($actor->movies as $movie)
-                <td>{{ $movie->year }} </td>
-            @endforeach
-
-            @foreach ($actor->roles as $role)
-                <td>{{ $role->role_name}}</td>
-            </tr>
-            @endforeach
-
-
-        </tbody>
-    </table>
-
-    {{-- <div class="card text-white">
-        {{ dd($actor->movie_actors()) }}
-    </div> --}}
-
-    @endforeach
 </div>
-</div>
+
 @endsection
