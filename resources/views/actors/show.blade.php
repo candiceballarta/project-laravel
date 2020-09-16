@@ -64,7 +64,7 @@
     {{-- <div class="card text-white">
         {{ dd($actor->movie_actors()) }}
     </div> --}}
-    
+
     @endforeach
 </div>
 </div>
