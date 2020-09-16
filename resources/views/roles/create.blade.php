@@ -11,10 +11,26 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <div class="form-group">
-                    <label for="role_name" class="control-label">Roles</label>
+                    <label for="role_name" class="control-label">Character Name</label>
                     <input type="text" class="form-control" id="role_name" name="role_name" value="{{old('role_name')}}">
                     @if($errors->has('role_name'))
                     <small>{{ $errors->first('role_name') }}</small>
+                    @endif
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for=movie" class="control-label">Movie</label>
+                    {!! Form::select('movie_id',$movies, null,['class' => 'form-control']) !!}
+                    @if($errors->has('movie'))
+                    <small>{{ $errors->first('movie') }}</small>
+                    @endif
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="actor" class="control-label">Actor</label>
+                    {!! Form::select('actor_id',$actors, null,['class' => 'form-control']) !!}
+                    @if($errors->has('actors'))
+                    <small>{{ $errors->first('actor') }}</small>
                     @endif
                 </div>
 

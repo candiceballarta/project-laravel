@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Movies;
 use App\Producers;
 use App\Ratings;
+use App\Genres;
+use App\Roles;
 
 class MoviesController extends Controller
 {
@@ -30,13 +32,8 @@ class MoviesController extends Controller
      */
     public function index()
     {
-        //$movies = DB::table('movies')->leftJoin('producers','movies.producer_id','=','producers.producer_id')->get();
-        //$movies = movies::all();
         $movies = Movies::with('producers')->get();
         //dd($movies);
-        // foreach ($movies as $movie) {
-        //     dump($movie->producers);
-        // }
         return View::make('movies.index',compact('movies'));
     }
 
@@ -48,7 +45,8 @@ class MoviesController extends Controller
     public function create()
     {
         $producers = Producers::pluck('fname','producer_id');
-        return View::make('movies.create',compact('producers'));
+        $genres = Genres::all();
+        return View::make('movies.create',compact('producers', 'genres'));
     }
 
     /**
@@ -80,17 +78,25 @@ class MoviesController extends Controller
         }
 
         $input = $request->all();
+        //dd($input);
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
             $movies = new Movies;
             $movies->title = $input['title'];
             $movies->plot = $input['plot'];
             $movies->year = $input['year'];
-            $movies->producer_id = $input['producer_id'];
             $movies->movie_image = $filenameToStore;
+            $movies->producers()->associate($input['producer_id']);
             $movies->save();
+            //dd($movies->movie_id);
+
+            foreach ($request->genre_id as $genre_id) {
+                DB::insert('insert into genre_movie(genre_id, movie_id) values (?,?)', [$genre_id, $movies->movie_id]);
+            }
+
             return Redirect::to('/movies')->with('success','New Movie added!');
         }
+
         return redirect()->back()->withInput()->withErrors($validator);
     }
 
@@ -102,16 +108,27 @@ class MoviesController extends Controller
      */
     public function show($id)
     {
-        $movies = Movies::with('producers', 'actors')
+        $movies = Movies::with('Producers')
         ->where('movies.movie_id', '=', $id)
         ->get();
 
-        $rate = Ratings::with('users')
-        ->where('movie_id', '=', $id)
+        $roles = DB::table('roles')
+        ->join('movies', 'roles.movie_id', '=', 'movies.movie_id')
+        ->join('actors', 'roles.actor_id', '=', 'actors.actor_id')
+        ->where('movies.movie_id', '=', $id)
         ->get();
 
+        $ratings = DB::table('ratings')
+        ->join('movies', 'ratings.movie_id', '=', 'movies.movie_id')
+        ->join('users', 'ratings.user_id', '=', 'users.id')
+        ->where('movies.movie_id', '=', $id)
+        ->get();
+
+        $average = Ratings::avg('score');
+        $round = round($average, 1);
+
         //dd($movies);
-        return View::make('movies.show',compact('movies'));
+        return View::make('movies.show',compact('movies', 'ratings', 'round', 'roles'));
     }
 
     /**
@@ -123,10 +140,15 @@ class MoviesController extends Controller
      */
     public function edit($id)
     {
-        $movies = Movies::find($id);
+        $movies = Movies::with('genres')->find($id);
+
+        $genre_movie = DB::table('genre_movie')
+        ->where('movie_id', $id)->pluck('genre_id')->toArray();
+        $genres = Genres::all();
         $producers = Producers::pluck('fname','producer_id');
+
         //dd($movies);
-        return View::make('movies.edit',compact('movies','producers'));
+        return View::make('movies.edit',compact('movies', 'genre_movie', 'genres','producers'));
     }
 
     /**
@@ -157,6 +179,19 @@ class MoviesController extends Controller
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
             $movies = Movies::find($id);
+            $genre_ids = $request->input('genre_id');
+
+            if(empty($genre_ids)){
+                DB::table('genre_movie')->where('movie_id',$id)->delete();
+            } else {
+                foreach($genre_ids as $genre_id) {
+                    DB::table('genre_movie')->where('movie_id',$id)->delete();
+                }
+                foreach($genre_ids as $genre_id) {
+                    DB::table('genre_movie')->insert(['genre_id' => $genre_id, 'movie_id' => $id]);
+                }
+            }
+
             $movies->title = $input['title'];
             $movies->plot = $input['plot'];
             $movies->year = $input['year'];
@@ -164,8 +199,7 @@ class MoviesController extends Controller
             if($request->hasFile('movie_image')){
                 $movies->movie_image = $filenameToStore;
             }
-            $movies->save();
-
+            $movies->update($input);
             return Redirect::to('/movies')->with('success','Movie updated!');
         }
         return redirect()->back()->withInput()->withErrors($validator);
@@ -180,6 +214,7 @@ class MoviesController extends Controller
     public function destroy($id)
     {
         $movies = Movies::findOrFail($id);
+        DB::table('genre_movie')->where('movie_id',$id)->delete();
         $movies->delete();
         return Redirect::to('/movies')->with('success','Movie deleted!');
     }

@@ -49,6 +49,16 @@
                     @endif
                 </div>
 
+                <div class="form-group mb-3">
+                    <label class="control-label">Genre</label><br>
+                    @foreach ($genres as $id => $genre)
+                    <div class="form-check form-check-inline">
+                        {!! Form::checkbox('genre_id[]', $genre->genre_id, null, array('class'=>'form-check-input','id'=>'genre')) !!}
+                        {!!Form::label('genre', $genre->genre_name,array('class'=>'form-check-label')) !!}
+                    </div>
+                    @endforeach
+                </div>
+
 
                 <button type="submit" class="btn btn-primary">Save</button>
                 <a href="{{url()->previous()}}" class="btn btn-default" role="button">Cancel</a>

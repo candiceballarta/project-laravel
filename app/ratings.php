@@ -12,7 +12,7 @@ class Ratings extends Model
 
     public function movies()
     {
-        return $this->belongsToMany('App\movies', 'movie_ratings', 'rating_id', 'movie_id');
+        return $this->belongsTo('App\Movies', 'movie_id');
     }
 
     public function users()

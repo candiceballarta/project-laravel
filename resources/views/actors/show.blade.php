@@ -25,7 +25,7 @@
                             @endforeach
                             <div class="card-body">
                                 @foreach ($actor->movies as $movie)
-                                    <h5 class="card-title font-weight-bold" style="color: #FF2340">{{$movie->title}}</h5> 
+                                    <h5 class="card-title font-weight-bold" style="color: #FF2340">{{$movie->title}}</h5>
                                 @endforeach
                                 @foreach ($actor->roles as $role)
                                     <p class="card-text">{{ $role->role_name}}</p>
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-@endforeach        
+@endforeach
     </div>
 </div>
 

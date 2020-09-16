@@ -59,16 +59,15 @@ class RatingsController extends Controller
 
         $input = $request->all();
         //dd($input);
-        $movies = movies::find($input['movie_id']);
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {
             $rating = new ratings;
             $rating->score = $input['score'];
             $rating->comment = $input['comment'];
+            $rating->movies()->associate($input['movie_id']);
             $rating->user_id = $input['user_id'];
             $rating->save();
-            $idOfRating = $rating->id;
-            $movies->ratings()->attach($idOfRating);
+
 
             return redirect()->back()->with('success','New Rating added!');
         }
