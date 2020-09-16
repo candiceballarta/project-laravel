@@ -124,7 +124,11 @@ class MoviesController extends Controller
         ->where('movies.movie_id', '=', $id)
         ->get();
 
-        $average = Ratings::avg('score');
+        $average = DB::table('ratings')
+        ->join('movies', 'ratings.movie_id', '=', 'movies.movie_id')
+        ->join('users', 'ratings.user_id', '=', 'users.id')
+        ->where('movies.movie_id', '=', $id)
+        ->avg('score');
         $round = round($average, 1);
 
         //dd($movies);
