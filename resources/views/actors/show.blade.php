@@ -5,8 +5,7 @@
 
 <div class="bg-container">
     <div class="container">
-        <div class="bg-warning" style="height: 200px;">
-        </div>
+        <div class="bg-warning" style="height: 200px;"></div>
         <div class="card mb-3 bg-dark" style="width: 200;">
             <div class="text-center py-5">
                 <img src="/storage/actor_images/{{ $actor->actor_image }}" class="avatar img-lg rounded-circle mb-4" width="200" height="200">
