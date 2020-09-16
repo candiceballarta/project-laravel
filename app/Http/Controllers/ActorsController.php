@@ -54,8 +54,8 @@ class ActorsController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'fname'=>'required|max:16|alpha',
-            'lname'=>'required|max:16|alpha',
+            'fname'=>'required|max:16',
+            'lname'=>'required|max:16',
             'notes'=>'required|max:50',
             'actor_image' => 'image|nullable|max:1999'
         ];
@@ -122,8 +122,8 @@ class ActorsController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'fname'=>'required|max:16|alpha',
-            'lname'=>'required|max:16|alpha',
+            'fname'=>'required|max:16',
+            'lname'=>'required|max:16',
             'notes'=>'required|max:50',
             'actor_image' => 'image|nullable|max:1999'
         ];
