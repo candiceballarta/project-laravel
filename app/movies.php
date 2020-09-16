@@ -12,29 +12,24 @@ class Movies extends Model
     protected $primaryKey = 'movie_id';
     use SoftDeletes;
 
-    public function actors()
+    public function roles()
     {
-        return $this->belongsToMany('App\actors', 'movie_actors', 'movie_id', 'actor_id');
+        return $this->hasMany('App\Roles', 'role_id', 'movie_id');
     }
 
     public function producers()
     {
-        return $this->belongsTo('App\producers', 'producer_id');
+        return $this->belongsTo('App\Producers', 'producer_id');
     }
 
     public function ratings()
     {
-        return $this->belongsToMany('App\ratings', 'movie_ratings', 'movie_id', 'rating_id');
+        return $this->hasMany('App\Ratings', 'rating_id', 'movie_id');
     }
 
-    public function genre()
+    public function genres()
     {
-        return $this->belongsToMany('App\genre', 'movie_genre', 'movie_id', 'genre_id');
-    }
-
-    public function roles()
-    {
-        return $this->belongsToMany('App\roles', 'movie_actors', 'actor_id' , 'role_id');
+        return $this->belongsToMany('App\Genres', 'genre_movie', 'movie_id', 'genre_id')->withTimestamps();
     }
 
 }

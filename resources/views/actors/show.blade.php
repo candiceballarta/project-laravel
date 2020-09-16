@@ -31,7 +31,7 @@
     <table class="table table-striped table-hover text-white">
         <thead>
             <tr>
-                <th>Poster</th> 
+                <th>Poster</th>
                 <th>Movie Title</th>
                 <th>Year</th>
                 <th>Role</th>
@@ -39,23 +39,23 @@
         </thead>
         <tbody>
 
-            @foreach ($actor->movies as $movie)
+            {{-- @foreach ($actor->roles as $role)
             <tr>
-                <td>{{ $movie->movie_image }} </td>
+                <td>{{ $role->movie_image }} </td>
             @endforeach
-            
-            @foreach ($actor->movies as $movie)
+
+            @foreach ($role->movies as $movie)
                 <td>{{ $movie->title }} </td>
             @endforeach
 
-            @foreach ($actor->movies as $movie)
+            @foreach ($role->movies as $movie)
                 <td>{{ $movie->year }} </td>
             @endforeach
 
-            @foreach ($actor->roles as $role)
+            @foreach ($role->roles as $role)
                 <td>{{ $role->role_name}}</td>
             </tr>
-            @endforeach
+            @endforeach --}}
 
 
         </tbody>
@@ -64,7 +64,7 @@
     {{-- <div class="card text-white">
         {{ dd($actor->movie_actors()) }}
     </div> --}}
-    
+
     @endforeach
 </div>
 </div>

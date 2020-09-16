@@ -41,7 +41,9 @@ class RolesController extends Controller
      */
     public function create()
     {
-        return View::make('roles.create');
+        $movies = movies::pluck('title','movie_id');
+        $actors = actors::pluck('fname','actor_id');
+        return View::make('roles.create', compact('movies', 'actors'));
     }
 
     /**
@@ -53,7 +55,9 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'role_name'=>'required|max:45'
+            'role_name'=>'required|max:45',
+            'movie_id'=>'integer',
+            'actor_id'=>'integer'
         ];
 
         $input = $request->all();
@@ -61,6 +65,8 @@ class RolesController extends Controller
         if ($validator->passes()) {
             $roles = new roles;
             $roles->role_name = $input['role_name'];
+            $roles->movies()->associate($input['movie_id']);
+            $roles->actors()->associate($input['actor_id']);
             $roles->save();
             return Redirect::to('/roles')->with('success','Role created!');
         }
@@ -90,7 +96,8 @@ class RolesController extends Controller
     public function edit($id)
     {
         $roles = roles::find($id);
-        //dd($roles);
+        $movies = movies::pluck('title','movie_id');
+        $actors = actors::pluck('fname','actor_id');
         return View::make('roles.edit',compact('roles'));
     }
 
@@ -104,7 +111,9 @@ class RolesController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'role_name'=>'required|max:45'
+            'role_name'=>'required|max:45',
+            'movie_id'=>'integer',
+            'actor_id'=>'integer'
         ];
 
         $input = $request->all();
@@ -112,6 +121,8 @@ class RolesController extends Controller
         if ($validator->passes()) {
             $roles = roles::find($id);
             $roles->role_name = $input['role_name'];
+            $roles->movies()->associate($input['movie_id']);
+            $roles->actors()->associate($input['actor_id']);
             $roles->save();
 
         }

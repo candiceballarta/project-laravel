@@ -11,11 +11,11 @@ class Roles extends Model
 
     public function actors()
     {
-        return $this->belongsToMany('App\actors', 'movie_actors', 'role_id', 'actor_id');
+        return $this->belongsTo('App\Actors', 'actor_id');
     }
 
     public function movies()
     {
-        return $this->belongsToMany('App\movies', 'movie_actors', 'role_id', 'movie_id');
+        return $this->belongsTo('App\Movies', 'movie_id');
     }
 }

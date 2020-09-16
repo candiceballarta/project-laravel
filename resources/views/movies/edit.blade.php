@@ -53,6 +53,20 @@
                 @endif
             </div>
 
+            <div class="form-group col-md-4">
+                @foreach ($genres as $genre_id => $genre)
+                <div class="form-check form-check-inline">
+                    @if (in_array($genre_id, $genre_movie))
+                    {!! Form::checkbox('genre_id[]',$genre->genre_id, true, array('class'=>'form-check-input','id'=>'genre')) !!}
+                    {!!Form::label('genre', $genre->genre_name,array('class'=>'form-check-label')) !!}
+                    @else
+                    {!! Form::checkbox('genre_id[]',$genre->genre_id, null, array('class'=>'form-check-input','id'=>'genre')) !!}
+                    {!!Form::label('genre', $genre->genre_name,array('class'=>'form-check-label')) !!}
+                    @endif
+                </div>
+                @endforeach
+            </div>
+
             <input type="hidden"   name="id" value="{{$movies->movie_id}}">
             <button type="submit" class="btn btn-primary">Update</button>
             <a href="{{url()->previous()}}" class="btn btn-default" role="button">Cancel</a>

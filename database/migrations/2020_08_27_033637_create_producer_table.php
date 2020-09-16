@@ -62,13 +62,14 @@ class CreateProducerTable extends Migration
             $table->foreign('genre_id')->references('genre_id')->on('genres')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('movie_id')->unsigned();
             $table->foreign('movie_id')->references('movie_id')->on('movies')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
         });
 
         Schema::create('ratings', function (Blueprint $table) {
             $table->id('rating_id');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('movie_id')->unsigned();
+            $table->foreign('movie_id')->references('movie_id')->on('movies')->onDelete('cascade')->onUpdate('cascade');
             $table->string('score',45);
             $table->text('comment');
             $table->timestamps();
@@ -83,14 +84,15 @@ class CreateProducerTable extends Migration
      */
     public function down()
     {
-
-        Schema::dropIfExists('movie_genres');
+        Schema::dropIfExists('ratings');
+        Schema::dropIfExists('genre_movie');
+        Schema::dropIfExists('genres');
         Schema::dropIfExists('roles');
         Schema::dropIfExists('movies');
         Schema::dropIfExists('actors');
         Schema::dropIfExists('producers');
-        Schema::dropIfExists('genres');
-        Schema::dropIfExists('ratings');
+
+
 
     }
 }

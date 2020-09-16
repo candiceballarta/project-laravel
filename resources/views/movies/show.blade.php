@@ -13,7 +13,7 @@
                 <small>{{ $movie->year }}</small>
             </div>
             <div class="rating">
-                <h1><span class="badge badge-warning">{{ $avg.'/5' }}</span></h1>
+                <h1><span class="badge badge-warning">{{ $round.'/5' }}</span></h1>
             </div>
         </div>
     </div>
@@ -33,22 +33,27 @@
         <div class="col-md-8">
             <div class="card mb-3 bg-dark" style="width: 45rem;">
                 <div class="card-header bg-warning text-black-50">Reviews</div>
-                @if ($movie->ratings->isEmpty())
+                @if ($ratings->isEmpty())
                     <div class="card-body">
                         <h5 class="card-title">No rating <span class="badge badge-warning">0/5</span></h5>
                         <p class="card-text">This movie has not been rated yet.</p>
                     </div>
                 @else
-                    @foreach ($movie->ratings as $rating)
+                    @foreach ($ratings as $rating)
                         <div class="card-body">
-                            <h5 class="card-title">{{ $movie->name }}<span class="badge badge-warning">{{ $rating->score.'/5' }}</span></h5>
+                            <h5 class="card-title">{{ $rating->name }}<span class="badge badge-warning">{{ 'Score: '.$rating->score.'/5' }}</span></h5>
                             <p class="card-text">{{ $rating->comment }}</p>
                         </div>
                     @endforeach
                 @endif
                 <div class="card-footer bg-transparent border-warning">
                     {{-- {!! Form::model($ratings ?? ['method'=>'PATCH','route' => ['ratings.create'], 'class'=>'form-row align-items-center']) !!} --}}
-                    <form method="post" action="{{url('ratings')}}" class="form-row align-items-center">
+                    @guest
+                        <div class="container">
+                            Please log in to rate this movie.
+                        </div>
+                    @else
+                        <form method="post" action="{{url('ratings')}}" class="form-row align-items-center">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="movie_id" value="{{ $movie->movie_id }}">
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -79,6 +84,7 @@
                         <button type="submit" style="height: 40px" class="btn btn-outline-warning col-2">Save</button>
                     </form>
                     {!! Form::close() !!}
+                    @endguest
                 </div>
             </div>
         </div>
@@ -87,18 +93,24 @@
         <div class="card mb-3 bg-dark" style="width: 23rem;">
             <div class="card-header bg-warning text-black-50">
                 Cast
-                <a href="{{route('movieactors.create')}}" class="btn btn-danger a-btn-slide-text mx-auto">
+                <a href="{{route('roles.create')}}" class="btn btn-danger a-btn-slide-text mx-auto">
                     <i class="fas fa-plus"></i>
                 </a>
             </div>
             <ul class="list-group list-group-flush bg-dark">
                 <li class="list-group-item bg-dark">
-                    @foreach ($movie->actors as $actor)
+                    @if ($roles->isEmpty())
                         <div class="row inline-block">
-                            <img class="col-md-4" src="/storage/actor_images/{{ $actor->actor_image }}" alt="actor-poster" width="80" height="100">
-                            <h5 class="mt-4">{{ $actor->fname.' '.$actor->lname }}</h5>
+                            <h5 class="ml-4 mt-4">No Actors Yet</h5>
                         </div>
-                    @endforeach
+                    @else
+                        @foreach ($roles as $role)
+                            <div class="row inline-block">
+                                <img class="col-md-4" src="/storage/actor_images/{{ $role->actor_image }}" alt="actor-poster" width="80" height="100">
+                                <p class="mt-4">{{ $role->fname.' '.$role->lname }}<br>{{ ' as '.$role->role_name }}</p>
+                            </div>
+                        @endforeach
+                    @endif
                 </li>
             </ul>
         </div>
