@@ -16,30 +16,31 @@
                     </div>
                 </div>
             </div>
+            <div class="text-center mb-4">
+                <h3>MOVIES</h3>
+            </div>
+        
+@endforeach
+
             <div class="container">
                 <div class="row">
                     <div class="card-deck col-md-3">
+                    @foreach ($movies as $movie)
                         <div class="card mb-4 box-shadow bg-secondary" style="width: 220px;">
-                            @foreach ($actor->movies as $movie)
+                            <a href="{{route('movies.show',$movie->movie_id)}}">
                                 <img class="card-img-top" src="/storage/movie_images/{{ $movie->movie_image }}" alt="movie-poster" width="70" height="250"></a>
-                            @endforeach
                             <div class="card-body">
-                                @foreach ($actor->movies as $movie)
-                                    <h5 class="card-title font-weight-bold" style="color: #FF2340">{{$movie->title}}</h5>
-                                @endforeach
-                                @foreach ($actor->roles as $role)
-                                    <p class="card-text">{{ $role->role_name}}</p>
-                                @endforeach
-                                @foreach ($actor->movies as $movie)
-                                    <small>{{$movie->year}}</small><br>
-                                @endforeach
+                                <h5 class="card-title font-weight-bold" style="color: #FF2340">{{$movie->title}}</h5>
+                                <p class="card-text">{{ $movie->role_name}}</p>
+                                <small>{{$movie->year}}</small><br>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
-@endforeach
+
     </div>
 </div>
 
