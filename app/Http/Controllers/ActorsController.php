@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Actors;
 use App\Movies;
 use App\Producers;
+use App\Roles;
 
 class ActorsController extends Controller
 {
@@ -96,7 +97,15 @@ class ActorsController extends Controller
         $actors = Actors::where('actor_id', '=', $id)->with('Roles')->get();
         //$actors = actors::with('movies')->find($id);
         // dd($actors);
-        return View::make('actors.show',compact('actors'));
+
+        $movies = DB::table('movies')
+        ->join('roles', 'movies.movie_id', '=', 'roles.movie_id')
+        ->join('actors', 'roles.actor_id', '=', 'actors.actor_id')
+        ->where('actors.actor_id', '=', $id)
+        ->get();
+
+
+        return View::make('actors.show',compact('actors','movies'));
     }
 
     /**
