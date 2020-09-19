@@ -91,7 +91,8 @@ class MoviesController extends Controller
             //dd($movies->movie_id);
 
             foreach ($request->genre_id as $genre_id) {
-                DB::insert('insert into genre_movie(genre_id, movie_id) values (?,?)', [$genre_id, $movies->movie_id]);
+                DB::insert('insert into genre_movie(genre_id, movie_id) values (?,?)',
+                [$genre_id, $movies->movie_id]);
             }
 
             return Redirect::to('/movies')->with('success','New Movie added!');

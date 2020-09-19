@@ -62,6 +62,7 @@ class CreateProducerTable extends Migration
             $table->foreign('genre_id')->references('genre_id')->on('genres')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('movie_id')->unsigned();
             $table->foreign('movie_id')->references('movie_id')->on('movies')->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();
         });
 
         Schema::create('ratings', function (Blueprint $table) {
