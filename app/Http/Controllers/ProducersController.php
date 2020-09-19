@@ -52,7 +52,10 @@ class ProducersController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = ['fname'=>'required|max:16|alpha','lname'=>'required|max:16|alpha','company'=>'required|max:30'];
+        $rules = [
+            'fname'=>'required|max:16|alpha',
+            'lname'=>'required|max:16|alpha',
+            'company'=>'required|max:30'];
         $input = $request->all();
         $validator = Validator::make($input, $rules);
         if ($validator->passes()) {

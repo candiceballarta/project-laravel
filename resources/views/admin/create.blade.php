@@ -12,21 +12,9 @@
         </div>
     @endif
 
-<h2>Send Email</h2>
+<h2>Send Email to Users</h2>
 <form method="post" action="{{url('admin')}}" >
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-{{-- <div class="form-group">
-    <label for="name" class="control-label">Name</label>
-    <select class="form-control input-sm" id="name" name="name">
-        @foreach ($users as $row)
-            <option value="{{$row->id}}">{{$row->name}}</option>
-        @endforeach
-    </select>
-    @if($errors->has('name'))
-        <small>{{ $errors->first('name') }}</small>
-    @endif
-</div> --}}
 
 <input type="hidden" name="name" value="">
 <div class="form-group">

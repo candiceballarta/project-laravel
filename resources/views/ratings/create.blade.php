@@ -10,6 +10,14 @@
             <form method="post" action="{{url('roles')}}" >
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
+                <div class="form-group mb-3">
+                    <label for=movie" class="control-label">Movie</label>
+                    {!! Form::select('movie_id',$movies, null,['class' => 'form-control']) !!}
+                    @if($errors->has('movie'))
+                    <small>{{ $errors->first('movie') }}</small>
+                    @endif
+                </div>
+
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="score" class="control-label">Comment</label>

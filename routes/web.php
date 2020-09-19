@@ -18,18 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/email', function () {
-//     Mail::to('head@email.com')->send(new WelcomeMail());
-
-//     return new WelcomeMail();
-// });
-
-// Route::get('/uwu', function () {
-//     return "Hemlo boi~";
-// })
-
-
-
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('movies','MoviesController');
@@ -38,8 +26,10 @@ Route::resource('producers', 'ProducersController');
 Route::resource('genres', 'GenresController');
 Route::resource('ratings', 'RatingsController');
 Route::resource('roles', 'RolesController');
+
 Route::get('/movies/restore/{id}',['uses' => 'MoviesController@restore','as' => 'movies.restore']);
 Route::get('/actors/restore/{id}',['uses' => 'ActorsController@restore','as' => 'actors.restore']);
+
 Route::get('/contact', 'ContactFormController@create')->name('contact');
 Route::post('/contact', 'ContactFormController@store');
 Route::get('/admin', ['uses' => 'AdminEmailController@create', 'as' => 'admin.create']);

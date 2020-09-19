@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Ratings;
 use App\Movies;
+use Auth;
 
 class RatingsController extends Controller
 {
@@ -40,7 +41,8 @@ class RatingsController extends Controller
      */
     public function create()
     {
-        return View::make('ratings.create');
+        $movies = movies::pluck('title','movie_id');
+        return View::make('ratings.create', compact('movies'));
     }
 
     /**
@@ -65,7 +67,7 @@ class RatingsController extends Controller
             $rating->score = $input['score'];
             $rating->comment = $input['comment'];
             $rating->movies()->associate($input['movie_id']);
-            $rating->user_id = $input['user_id'];
+            $rating->user_id = Auth::id();
             $rating->save();
 
 
@@ -96,8 +98,9 @@ class RatingsController extends Controller
     public function edit($id)
     {
         $ratings = Ratings::find($id);
+        $movies = movies::pluck('title','movie_id');
         //dd($ratings);
-        return View::make('ratings.edit',compact('ratings'));
+        return View::make('ratings.edit',compact('ratings', 'movies'));
     }
 
     /**
@@ -109,9 +112,25 @@ class RatingsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ratings = Ratings::find($request->id);
-        $ratings->update($request->all());
-        return Redirect::to('/ratings')->with('success','Rating updated!');
+        $rules = [
+            'score'=>'required',
+            'comment'=>'required|profanity|max:350'
+        ];
+
+        $input = $request->all();
+        //dd($input);
+        $validator = Validator::make($input, $rules);
+        if ($validator->passes()) {
+            $rating = Ratings::find($id);
+            $rating->score = $input['score'];
+            $rating->comment = $input['comment'];
+            $rating->movies()->associate($input['movie_id']);
+            $rating->user_id = Auth::id();
+            $rating->save();
+
+            return Redirect::to('/movies')->with('success','Rating updated!');
+        }
+        return redirect()->back()->withInput()->withErrors($validator);;
     }
 
     /**

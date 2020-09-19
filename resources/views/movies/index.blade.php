@@ -18,7 +18,8 @@
             <div class="card-deck col-md-3">
                 <div class="card mb-4 box-shadow bg-dark" style="width: 220px;">
                     <a href="{{route('movies.show',$movie->movie_id)}}">
-                        <img class="card-img-top" src="/storage/movie_images/{{ $movie->movie_image }}" alt="movie-poster" width="70" height="250"></a>
+                        <img class="card-img-top" src="/storage/movie_images/{{ $movie->movie_image }}"
+                        alt="movie-poster" width="70" height="250"></a>
                         <div class="card-body">
                             <h5 class="card-title font-weight-bold" style="color: #FF2340">{{$movie->title}}</h5>
                             <p class="card-text">{{ $movie->producers->fname." ".$movie->producers->lname }}</p>

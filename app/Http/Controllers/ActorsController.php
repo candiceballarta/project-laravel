@@ -61,6 +61,7 @@ class ActorsController extends Controller
             'actor_image' => 'image|nullable|max:1999'
         ];
 
+        //Actor photo upload
         if($request->hasFile('actor_image')){
             $filenameWithExt = $request->file('actor_image')->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);

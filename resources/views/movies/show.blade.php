@@ -43,6 +43,14 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $rating->name }}<span class="badge badge-warning">{{ 'Score: '.$rating->score.'/5' }}</span></h5>
                             <p class="card-text">{{ $rating->comment }}</p>
+                            <div class="btn-group">
+                                {!! Form::open(array('route' => array('ratings.edit',$rating->rating_id),'method'=>'GET')) !!}
+                                    <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                {!! Form::close() !!}
+                                {!! Form::open(array('route' => array('ratings.destroy',$rating->rating_id),'method'=>'DELETE')) !!}
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                                {!! Form::close() !!}
+                            </div>
                         </div>
                     @endforeach
                 @endif
@@ -66,8 +74,6 @@
                             @endif
                         </div>
                         <div class="form-group col-md-3">
-                            {{-- {!! Form::label('score', 'Rating', array('class'=>'form-control')) !!}
-                            {!! Form::select('score', $ratings, null,['class' => 'form-control']) !!} --}}
                             <label for="score">Rating</label>
                             <select id="score" name="score" class="form-control">
                                 <option selected>Choose...</option>
